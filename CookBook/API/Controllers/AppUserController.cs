@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Interfaces;
+using API.Models;
+using API.Requests.AppUser;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +11,34 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    public class AppUserController : Controller
+ 
+    [ApiController]
+ 
+    public class AppUserController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IAppUserService _service;
+       
+        public AppUserController(IAppUserService service)
         {
-            return View();
+            _service = service;
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Authenticiraj/{username},{password}")]
+        public Models.AppUser Authenticiraj(string username, string password)
+        {
+            return _service.Authenticiraj(username, password);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("api/users")]
+        public List<Models.AppUser> GetUsers()
+        {
+            return _service.GetUsers();
+        }
+
+
     }
 }

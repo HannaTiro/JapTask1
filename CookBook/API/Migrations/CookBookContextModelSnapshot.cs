@@ -57,8 +57,8 @@ namespace API.Migrations
                             AppUserId = 1,
                             FirstName = "Hanna",
                             LastName = "Tiro",
-                            PasswordHash = "RqROsVJ23ixyuH0OQFJpaF21cZo=",
-                            PasswordSalt = "uuwfh2wsEcGQkLZ/KBrJGQ==",
+                            PasswordHash = "NajF0+p4nlUb3glEDDYGgUBJQkc=",
+                            PasswordSalt = "HnFcZdGuwh7/ZdOjigjbpA==",
                             Username = "hanna"
                         },
                         new
@@ -66,8 +66,8 @@ namespace API.Migrations
                             AppUserId = 2,
                             FirstName = "Belma",
                             LastName = "Nukic",
-                            PasswordHash = "vg9TNtKAA8I3S22Yiphs0D82xAs=",
-                            PasswordSalt = "/cGEpUKePNrrKL4rAIbShQ==",
+                            PasswordHash = "ADkRE2EDJRj8/DY0ULVFls5wMpM=",
+                            PasswordSalt = "WvCwmTYxWDIeZXTYj+DFsw==",
                             Username = "belma"
                         });
                 });
@@ -87,6 +87,63 @@ namespace API.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Pancakes"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Waffles"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Pizzas"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Fish"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Sushi"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Sandwiches"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "Meat"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryName = "Pasta"
+                        },
+                        new
+                        {
+                            CategoryId = 9,
+                            CategoryName = "Asian food"
+                        },
+                        new
+                        {
+                            CategoryId = 10,
+                            CategoryName = "Taccos"
+                        },
+                        new
+                        {
+                            CategoryId = 11,
+                            CategoryName = "Barbeque"
+                        });
                 });
 
             modelBuilder.Entity("API.Entities.Ingredient", b =>

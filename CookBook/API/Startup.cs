@@ -31,7 +31,8 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(); //exception helper add
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -43,7 +44,7 @@ namespace API
             services.AddScoped<ICategoryService, CategoryService>();
             // services.AddScoped<IIngredientService, IngredientService>();
             // services.AddScoped<IRecipeService, RecipeService>();
-            //   services.AddScoped<IAppUserService, AppUserService>();
+              services.AddScoped<IAppUserService, AppUserService>();
             //   services.AddScoped<IRecipeDetailService, RecipeDetailService>();
 
 
@@ -65,6 +66,10 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+
+
+
 
             app.UseAuthentication();
             app.UseAuthorization();

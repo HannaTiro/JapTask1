@@ -98,12 +98,29 @@ namespace API.Migrations
             migrationBuilder.InsertData(
                 table: "AppUser",
                 columns: new[] { "AppUserId", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "Username" },
-                values: new object[] { 1, "Hanna", "Tiro", "RqROsVJ23ixyuH0OQFJpaF21cZo=", "uuwfh2wsEcGQkLZ/KBrJGQ==", "hanna" });
+                values: new object[,]
+                {
+                    { 1, "Hanna", "Tiro", "NajF0+p4nlUb3glEDDYGgUBJQkc=", "HnFcZdGuwh7/ZdOjigjbpA==", "hanna" },
+                    { 2, "Belma", "Nukic", "ADkRE2EDJRj8/DY0ULVFls5wMpM=", "WvCwmTYxWDIeZXTYj+DFsw==", "belma" }
+                });
 
             migrationBuilder.InsertData(
-                table: "AppUser",
-                columns: new[] { "AppUserId", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "Username" },
-                values: new object[] { 2, "Belma", "Nukic", "vg9TNtKAA8I3S22Yiphs0D82xAs=", "/cGEpUKePNrrKL4rAIbShQ==", "belma" });
+                table: "Category",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[,]
+                {
+                    { 1, "Pancakes" },
+                    { 2, "Waffles" },
+                    { 3, "Pizzas" },
+                    { 4, "Fish" },
+                    { 5, "Sushi" },
+                    { 6, "Sandwiches" },
+                    { 7, "Meat" },
+                    { 8, "Pasta" },
+                    { 9, "Asian food" },
+                    { 10, "Taccos" },
+                    { 11, "Barbeque" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeDetail_IngredientId",

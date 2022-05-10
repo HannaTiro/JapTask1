@@ -29,7 +29,7 @@ namespace API
             //    await context.Database.MigrateAsync();
             //    await Seed.SeedUsers(userManager);
             //}
-            //catch (Exception ex)
+            //catch (Exception ex)c
             //{
 
             //    var logger = services.GetRequiredService<ILogger<Program>>();

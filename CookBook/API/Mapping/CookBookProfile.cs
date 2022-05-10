@@ -14,7 +14,7 @@ namespace API.Mapping
             CreateMap<Entities.Recipe, Models.Recipe>().ReverseMap();
             CreateMap<Entities.Ingredient, Models.Ingredient>().ReverseMap();
             CreateMap<Entities.RecipeDetail, Models.RecipeDetail>().ReverseMap();
-            CreateMap<Entities.AppUser, Models.AppUser>().ReverseMap();
+            CreateMap<Entities.AppUser, Models.AppUser>();
 
 
 

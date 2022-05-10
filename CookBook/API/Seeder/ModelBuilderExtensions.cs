@@ -73,7 +73,85 @@ namespace API.Seeder
             b.PasswordHash = HashGenerator.GenerateHash(b.PasswordSalt, "belma");
             modelBuilder.Entity<AppUser>().HasData(b);
 
+            //Category
 
+            Category cat1= new Category
+            {
+                CategoryId = 1,
+                CategoryName = "Pancakes"
+            };
+            modelBuilder.Entity<Category>().HasData(cat1);
+
+            Category cat2 = new Category
+            {
+                CategoryId = 2,
+                CategoryName = "Waffles"
+            };
+            modelBuilder.Entity<Category>().HasData(cat2);
+
+            Category cat3 = new Category
+            {
+                CategoryId = 3,
+                CategoryName = "Pizzas"
+            };
+            modelBuilder.Entity<Category>().HasData(cat3);
+
+
+            Category cat4 = new Category
+            {
+                CategoryId = 4,
+                CategoryName = "Fish"
+            };
+            modelBuilder.Entity<Category>().HasData(cat4);
+
+            Category cat5 = new Category
+            {
+                CategoryId = 5,
+                CategoryName = "Sushi"
+            };
+            modelBuilder.Entity<Category>().HasData(cat5);
+
+            Category cat6 = new Category
+            {
+                CategoryId = 6,
+                CategoryName = "Sandwiches"
+            };
+            modelBuilder.Entity<Category>().HasData(cat6);
+
+            Category cat7 = new Category
+            {
+                CategoryId = 7,
+                CategoryName = "Meat"
+            };
+            modelBuilder.Entity<Category>().HasData(cat7);
+
+            Category cat8 = new Category
+            {
+                CategoryId = 8,
+                CategoryName = "Pasta"
+            };
+            modelBuilder.Entity<Category>().HasData(cat8);
+
+            Category cat9 = new Category
+            {
+                CategoryId = 9,
+                CategoryName = "Asian food"
+            };
+            modelBuilder.Entity<Category>().HasData(cat9);
+
+            Category cat10 = new Category
+            {
+                CategoryId = 10,
+                CategoryName = "Taccos"
+            };
+            modelBuilder.Entity<Category>().HasData(cat10);
+
+            Category cat11 = new Category
+            {
+                CategoryId =11,
+                CategoryName = "Barbeque"
+            };
+            modelBuilder.Entity<Category>().HasData(cat11);
         }
     }
 }

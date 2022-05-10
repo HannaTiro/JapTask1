@@ -20,6 +20,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+      
         public ActionResult<List<Models.Category>> Get()
         {
             return _service.Get();
