@@ -1,4 +1,5 @@
 ﻿using API.Entities;
+using API.Filters;
 using API.Interfaces;
 using AutoMapper;
 using System;
@@ -18,11 +19,32 @@ namespace API.Services
             _context = context;
             _mapper = mapper;
         }
+
+        //public async Task<Models.AppUser> Login(LoginRequest request)
+        //{
+        //    var user = _context.AppUsers.FirstOrDefault(x => x.Username == request.Username);
+        //    if (user == null)
+        //    {
+        //        throw new UserException("Wrong username or password");
+        //    }
+        //    if (user != null)
+        //    {
+        //        var hash = Helper.HashGenerator.GenerateHash(user.PasswordSalt, request.Password);
+
+        //        if (hash != user.PasswordHash)
+        //        {
+        //            throw new UserException("Pogrešan username ili password");
+
+        //        }
+
+        //    }
+        //    return _mapper.Map<Models.AppUser>(user);
+        //}
         public Models.AppUser Authenticiraj(string username, string pass)
         {
             var user = _context.AppUsers.FirstOrDefault(x => x.Username == username);
-
-            if (user != null)
+           
+            if (user != null) 
             {
                 var hashedPass = Helper.HashGenerator.GenerateHash(user.PasswordSalt,pass); 
 
@@ -36,10 +58,18 @@ namespace API.Services
                     newUser.FirstName = user.FirstName;
                     newUser.LastName = user.LastName;
                     newUser.Username = user.Username;
+                    newUser.AppUserId = user.AppUserId;
+
                   
 
                     return newUser;
                 }
+                //else if(hashedPass!=user.PasswordHash)
+                //{
+
+                //   // throw new UserException("Pogrešan username ili password");
+                    
+                //}
             }
             return null;
         }

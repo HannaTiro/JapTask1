@@ -19,7 +19,7 @@ namespace API.Services
             _context = context;
             _mapper = mapper;
         }
-        public List<Models.Category> Get( )
+        public List<Models.Category> GetCategories( )
         {
             var query = _context.Categories
               .AsQueryable();
@@ -27,6 +27,23 @@ namespace API.Services
          
             var list = query.ToList();
             return _mapper.Map<List<Models.Category>>(list);
+        }
+
+        public async Task<Models.Category> GetCategoryId(int id)
+        {
+            var cat= await _context.Categories.FindAsync(id);
+            return _mapper.Map<Models.Category>(cat);
+
+        }
+
+        public Models.Category GetCategoryByName(string categoryName)
+        {
+          var cat= _context.Categories.Where(j => j.CategoryName == categoryName).FirstOrDefault();
+
+            return _mapper.Map<Models.Category>(cat);
+
+           
+
         }
     }
 }

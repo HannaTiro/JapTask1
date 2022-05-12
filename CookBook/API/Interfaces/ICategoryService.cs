@@ -1,4 +1,5 @@
-﻿using API.Requests.Category;
+﻿using API.Models;
+using API.Requests.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,9 @@ namespace API.Interfaces
 {
    public  interface ICategoryService
     {
-        List<Models.Category> Get();
+        List<Models.Category> GetCategories();
+        Task<Category> GetCategoryId(int id);
+        Models.Category GetCategoryByName(string categoryName);
+
     }
 }

@@ -1,0 +1,14 @@
+<div *ngIf="recipes" class="card-body p-1">
+    <h1 class="card-title text-center mb-1">
+      Recipe name:   {{recipes.recipeName}}
+    </h1>
+  <div>
+      <h3 class="text"> Description: </h3>
+      <h4 class="text">{{recipes.description}}</h4>
+  </div>
+
+  <div class="">
+    <h3 class="text"> Total price: </h3>
+    <h4 class="text">{{recipes.totalPrice}} BAM</h4>
+  </div>
+</div>

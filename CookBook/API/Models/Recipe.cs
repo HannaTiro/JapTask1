@@ -11,5 +11,7 @@ namespace API.Models
         public string RecipeName { get; set; }
         public string Description { get; set; }
         public decimal TotalPrice { get; set; }
+        public Category Category { get; set; }
+        public int? CategoryId { get; set; }
     }
 }

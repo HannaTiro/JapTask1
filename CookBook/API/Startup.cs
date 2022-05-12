@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
+using API.Filters;
 using API.Interfaces;
 using API.Services;
 using Microsoft.AspNetCore.Builder;
@@ -31,11 +32,38 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers(); //exception helper add
+            services.AddControllers(x =>
+            {
+                x.Filters.Add<ErrorFilter>();
+            });
+          
             services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+                c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+                {
+                    // Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "basic" //,
+                    //In = ParameterLocation.Header,
+                    //Description = "Basic Authorization header using the Bearer scheme."
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "basic"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
             });
             services.AddDbContext<CookBookContext>(c => c.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
              .EnableSensitiveDataLogging());
@@ -43,7 +71,7 @@ namespace API
 
             services.AddScoped<ICategoryService, CategoryService>();
             // services.AddScoped<IIngredientService, IngredientService>();
-            // services.AddScoped<IRecipeService, RecipeService>();
+             services.AddScoped<IRecipeService, RecipeService>();
               services.AddScoped<IAppUserService, AppUserService>();
             //   services.AddScoped<IRecipeDetailService, RecipeDetailService>();
 
