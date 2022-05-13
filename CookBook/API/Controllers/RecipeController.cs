@@ -1,5 +1,6 @@
 ﻿using API.Interfaces;
 using API.Models;
+using API.Requests.Recipe;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,6 @@ namespace API.Controllers
         }
 
         [HttpGet]
-
         public ActionResult<List<Models.Recipe>> GetRecipes()
         {
             return _service.GetRecipes();
@@ -41,16 +41,25 @@ namespace API.Controllers
 
         [HttpGet("{categoryName}")]
 
-       // [HttpGet("categoryName")]
+        // [HttpGet("categoryName")]
         public List<Models.Recipe> GetRecipeByCategory(string categoryName)
         {
             return _service.GetRecipeByCategory(categoryName);
         }
-         [HttpGet("getById/{id}")]
+
+        [HttpGet("getById/{id}")]
         public async Task<Models.Recipe> GetRecipeById(int id)
         {
             return await _service.GetRecipeById(id);
         }
+
+        [HttpPost("addRecipe")]
+        public async Task<IActionResult> InsertRecipe([FromBody]Models.Recipe request)
+        {
+
+            return Ok(await _service.InsertRecipe(request));
+        }
+
 
     }
 }

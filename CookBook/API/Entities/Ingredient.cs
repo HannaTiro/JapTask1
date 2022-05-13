@@ -17,6 +17,6 @@ namespace API.Entities
         public decimal IngredientPrice { get; set; }
         public int Amount { get; set; }
 
-        public virtual ICollection<RecipeDetail> RecipeDetails { get; set; }
+        public virtual ICollection<RecipeDetail> RecipeDetails { get; set; } 
     }
 }

@@ -11,7 +11,7 @@ import { CategoriesService } from './categories.service';
 export class RecipesService {
   baseUrl=environment.apiUrl;
   categoryN:string;
- 
+
 
   constructor(private http:HttpClient) {
 
@@ -26,6 +26,13 @@ export class RecipesService {
   getRecipeById(recipeId)
   {
    return this.http.get<Recipe[]>(this.baseUrl+'Recipe/getById/'+recipeId);
+  }
+
+  insertRecipe(recipe:Recipe)
+  {
+    //return this.http.post(this.baseUrl+'addRecipe?'+ recipe,{});
+    return this.http.post(this.baseUrl+'Recipe/addRecipe', recipe);
+
   }
   
 }

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using API.Requests.Recipe;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,9 @@ namespace API.Mapping
             CreateMap<Entities.Ingredient, Models.Ingredient>().ReverseMap();
             CreateMap<Entities.RecipeDetail, Models.RecipeDetail>().ReverseMap();
             CreateMap<Entities.AppUser, Models.AppUser>();
+            CreateMap<Models.Recipe, RecipePostRequest>().ReverseMap();
+
+
 
 
 

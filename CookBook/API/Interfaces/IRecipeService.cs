@@ -1,4 +1,6 @@
 ﻿using API.Models;
+using API.Requests.Recipe;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +16,6 @@ namespace API.Interfaces
 
        List< Models.Recipe> GetRecipeByCategory(string categoryName);
        Task<List<Recipe>> GetByCategory(int id);
+        Task<ActionResult<Entities.Recipe>> InsertRecipe(Models.Recipe request);
     }
 }

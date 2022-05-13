@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +7,24 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    public class IngredientController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class IngredientController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IIngredientService _service;
+
+        public IngredientController(IIngredientService service)
         {
-            return View();
+            _service = service;
         }
+
+        [HttpGet("getAll")]
+        public async Task<List<Models.Ingredient>> GetAll()
+        {
+            return await _service.GetAll();
+        }
+
+        
+      
     }
 }

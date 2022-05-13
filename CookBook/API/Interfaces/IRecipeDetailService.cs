@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace API.Interfaces
 {
-    interface IRecipeDetailService
+   public interface IRecipeDetailService
     {
+        List<Models.RecipeDetail> GetIngredients(int recipeId);
+
+
     }
 }

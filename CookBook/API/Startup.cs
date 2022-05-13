@@ -70,10 +70,10 @@ namespace API
             services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<ICategoryService, CategoryService>();
-            // services.AddScoped<IIngredientService, IngredientService>();
+             services.AddScoped<IIngredientService, IngredientService>();
              services.AddScoped<IRecipeService, RecipeService>();
               services.AddScoped<IAppUserService, AppUserService>();
-            //   services.AddScoped<IRecipeDetailService, RecipeDetailService>();
+              services.AddScoped<IRecipeDetailService, RecipeDetailService>();
 
 
 

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.Models
+namespace API.Requests.Recipe
 {
-    public class Recipe
+    public class RecipePostRequest
     {
-        public int RecipeId { get; set; }
         public string RecipeName { get; set; }
         public string Description { get; set; }
-        public decimal TotalPrice { get; set; }
-        public Category Category { get; set; }
+       
+     
         public int CategoryId { get; set; }
     }
 }
