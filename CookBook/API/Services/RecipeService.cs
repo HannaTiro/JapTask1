@@ -61,6 +61,15 @@ namespace API.Services
             return _mapper.Map<List<Models.Recipe>>(list);
         }
 
+        public List<Models.RecipeDetail> GetIngredients(int recipeId)
+        {
+            var request = _context.RecipeDetails.Include(x => x.Recipe).Include(x => x.Ingredient).Where(x => x.Recipe.RecipeId == recipeId).AsQueryable();
+            var list = request.ToList();
+            return _mapper.Map<List<Models.RecipeDetail>>(list);
+
+
+        }
+
         public  async Task<ActionResult<Entities.Recipe>> InsertRecipe(Models.Recipe request)
         {
             var model = new Entities.Recipe

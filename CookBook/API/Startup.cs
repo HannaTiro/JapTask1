@@ -32,10 +32,11 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers(x =>
-            {
-                x.Filters.Add<ErrorFilter>();
-            });
+            //services.AddControllers(x =>
+            //{
+            //    x.Filters.Add<ErrorFilter>();
+            //});
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
           
             services.AddCors();
             services.AddSwaggerGen(c =>

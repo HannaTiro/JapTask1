@@ -1,6 +1,8 @@
 ﻿using API.Entities;
 using API.Interfaces;
+using API.Requests.RecipeDetail;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,26 @@ namespace API.Services
 
         }
 
+        public async Task<ActionResult<Models.RecipeDetail>> InsertIngredient(int recipeId, InsertIngredientRequest request)
+        {
+      
+            
+             var recipe = _context.Recipes.Find(recipeId);
+            
+                var entity = new RecipeDetail
+                {
+                    RecipeId = recipe.RecipeId,
+                    Amount = request.Amount,
+                    IngredientId = request.IngredientId,
+                    Measure = request.Measure
 
+                };
+          //  entity.Price= //formula
+                _context.RecipeDetails.Add(entity);
+              await  _context.SaveChangesAsync();
+                return _mapper.Map<Models.RecipeDetail>(entity);
+            
+            
+           }
     }
 }

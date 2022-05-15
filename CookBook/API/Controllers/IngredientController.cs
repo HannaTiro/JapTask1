@@ -23,8 +23,12 @@ namespace API.Controllers
         {
             return await _service.GetAll();
         }
+        [HttpGet("getUnits")]
+        public List<string> GetUnits()
+        {
+            return _service.GetUnits();
+        }
 
-        
-      
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using API.Interfaces;
+using API.Requests.RecipeDetail;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,13 @@ namespace API.Controllers
         {
             return _service.GetIngredients(recipeId);
         }
+
+        [HttpPost("addIngredient/{recipeId}")]
+        public async Task<IActionResult> InsertIngredient(int recipeId, [FromBody]InsertIngredientRequest request)
+        {
+            return Ok(await _service.InsertIngredient(recipeId, request));
+        }
+
 
     }
 }

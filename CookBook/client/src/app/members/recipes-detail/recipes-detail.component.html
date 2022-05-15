@@ -2,13 +2,43 @@
     <h1 class="card-title text-center mb-1">
       Recipe name:   {{recipes.recipeName}}
     </h1>
-  <div>
+    <div class="card-body">
       <h3 class="text"> Description: </h3>
       <h4 class="text">{{recipes.description}}</h4>
-  </div>
-
-  <div class="">
+ 
     <h3 class="text"> Total price: </h3>
     <h4 class="text">{{recipes.totalPrice}} BAM</h4>
+
+    <h3>Ingredients</h3>
+    <div>
+       <table>
+         <tr>
+          <th>Ingredient name</th>
+          <th>Amount</th>
+          <th>Measure</th>
+          <th>Cost</th>
+         </tr>
+        <tr  *ngFor="let ingred of ingredients"> 
+     
+         
+         <td>{{ingred.ingredient.ingredientName}}</td>
+         <td>{{ingred.amount}}</td>
+         <td>{{ingred.measure}}</td>
+         <td> ___ BAM </td>
+      
+        
+    
+ </tr>
+
+      
+    
+
+       </table>
+    </div>
   </div>
+
+
+  <button class="btn btn-primary" routerLink="/ingredientAdd/{{recipeId}}" >
+   Add new ingredient
+</button>
 </div>

@@ -26,5 +26,11 @@ namespace API.Services
             return  _mapper.Map<List<Models.Ingredient>>(i);
 
         }
+
+        public List<string> GetUnits()
+        {
+            var list = new List<string> { "kg", "g", "l", "ml", "kom" };
+            return list;
+        }
     }
 }

@@ -1,0 +1,52 @@
+
+    <h1>Add ingredients to your recipe!</h1>
+    <div  class="row" >
+        <div class="col">
+            <div class="card" style="padding: 20px;">
+                <form [formGroup]="ingreientAddForm" (ngSubmit)="ingreientAddForm.valid && addIngredient()" autocomplete="off"> 
+
+                    <div>
+                        <strong>Ingredient:</strong><br>
+                        <select
+                        [class.is-invalid]='ingreientAddForm.get("ingredientId").errors && ingreientAddForm.get("ingredientId").touched'
+                        name="Ingredient"
+                        (change)="ChangeIgredient($event)"
+                        formControlName="ingredientId"
+                        >
+                        
+                            <option [value]="ing.ingredientId" *ngFor="let ing of ingredients"> {{ing.ingredientName}}</option>
+
+                        </select>
+                        <br><br>
+                    </div>
+                    <div class="amountt">
+                        <strong>Amount:</strong><br>
+                        <app-text-input  [formControl]='ingreientAddForm.controls["amount"]' [label]='"Amount"'></app-text-input>
+
+                    </div>
+                    <div>
+                        <strong>Unit measure:</strong><br>
+                        <select
+                        [class.is-invalid]='ingreientAddForm.get("measure").errors && ingreientAddForm.get("measure").touched'
+                        name="Measure"
+                        (change)="ChangeMeasure($event)"
+                        formControlName="measure"
+                        >
+                           <!--  <option *ngFor="let i of ingredients">
+                                {{i.ingredientName}}
+                            </option> -->
+                            <option [value]="unit" *ngFor="let unit of units">  {{unit.toString()}}</option>
+
+                        </select>
+                        <br><br>
+                    </div>
+                    <br><br>
+                    <div class="card-footer">
+                        <div class="btn-group d-flex">
+                            <button [disabled]="!ingreientAddForm.valid" class="btn btn-primary" type="submit">Add ingredient</button>
+                        </div>
+                    </div>
+            </form>
+            </div>
+        </div>
+    </div>

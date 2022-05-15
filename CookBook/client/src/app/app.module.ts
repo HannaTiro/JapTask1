@@ -15,6 +15,7 @@ import { RecipeAddComponent } from './members/recipe-add/recipe-add.component';
 import { CategoryCardComponent } from './members/category-card/category-card.component';
 import { RecipeCardComponent } from './members/recipe-card/recipe-card.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { IngredientsRecipeAddComponent } from './members/ingredients-recipe-add/ingredients-recipe-add.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
     RecipeAddComponent,
     CategoryCardComponent,
     RecipeCardComponent,
-    TextInputComponent
+    TextInputComponent,
+    IngredientsRecipeAddComponent
   ],
   imports: [
     BrowserModule,

@@ -61,5 +61,11 @@ namespace API.Controllers
         }
 
 
+        [HttpGet("getIngredientsRecipe/{recipeId}")]
+        public List<Models.RecipeDetail> GetIngredients(int recipeId)
+        {
+            return _service.GetIngredients(recipeId);
+        }
+
     }
 }

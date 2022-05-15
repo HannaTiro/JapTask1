@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Category } from '../_models/category';
+import { ReciepeDetail } from '../_models/reciepeDetail';
 import { Recipe } from '../_models/recipe';
 import { CategoriesService } from './categories.service';
 
@@ -34,6 +35,11 @@ export class RecipesService {
     return this.http.post(this.baseUrl+'Recipe/addRecipe', recipe);
 
   }
+  getIngredients(recipeId)
+  {
+    return this.http.get<ReciepeDetail[]>(this.baseUrl+'Recipe/getIngredientsRecipe/'+recipeId);
+  }
+
   
 }
 

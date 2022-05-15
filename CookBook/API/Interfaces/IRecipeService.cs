@@ -17,5 +17,7 @@ namespace API.Interfaces
        List< Models.Recipe> GetRecipeByCategory(string categoryName);
        Task<List<Recipe>> GetByCategory(int id);
         Task<ActionResult<Entities.Recipe>> InsertRecipe(Models.Recipe request);
+        List<Models.RecipeDetail> GetIngredients(int recipeId);
+
     }
 }
