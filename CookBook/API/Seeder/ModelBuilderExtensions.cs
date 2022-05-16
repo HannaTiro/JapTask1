@@ -152,6 +152,194 @@ namespace API.Seeder
                 CategoryName = "Barbeque"
             };
             modelBuilder.Entity<Category>().HasData(cat11);
+
+
+            // Ingredient
+            modelBuilder.Entity<Ingredient>().HasData(
+                new Ingredient()
+                {
+                    IngredientId = 1,
+                    IngredientName = "Eggs",
+                    IngredientPrice = 5,
+                    Amount = 9,
+                    Measure = "kom"
+                },
+                new Ingredient()
+                {
+                    IngredientId = 2,
+                    IngredientName = "Milk",
+                    IngredientPrice = 200,
+                    Amount = 170,
+                    Measure = "l"
+                },
+                  new Ingredient()
+                  {
+                      IngredientId = 3,
+                      IngredientName = "Flour",
+                      IngredientPrice = 70,
+                      Amount = 50,
+                      Measure = "kg"
+                  },
+                    new Ingredient()
+                    {
+                        IngredientId = 4,
+                        IngredientName = "Chicken",
+                        IngredientPrice = 16,
+                        Amount = 2,
+                        Measure = "kg"
+                    },
+                      new Ingredient()
+                      {
+                          IngredientId = 5,
+                          IngredientName = "Beef",
+                          IngredientPrice = 20,
+                          Amount = 2,
+                          Measure = "kg"
+                      },
+                        new Ingredient()
+                        {
+                            IngredientId = 6,
+                            IngredientName = "Cheese",
+                            IngredientPrice = 20,
+                            Amount = 5,
+                            Measure = "kg"
+                        },
+                          new Ingredient()
+                          {
+                              IngredientId = 7,
+                              IngredientName = "Yogurt",
+                              IngredientPrice = 7,
+                              Amount = 3,
+                              Measure = "l"
+                          },
+                            new Ingredient()
+                            {
+                                IngredientId = 8,
+                                IngredientName = "Patatoes",
+                                IngredientPrice = 30,
+                                Amount = 10,
+                                Measure = "kg"
+                            },
+                              new Ingredient()
+                              {
+                                  IngredientId = 9,
+                                  IngredientName = "Spinach",
+                                  IngredientPrice = 10,
+                                  Amount = 10,
+                                  Measure = "kg"
+                              },
+                                new Ingredient()
+                                {
+                                    IngredientId = 10,
+                                    IngredientName = "Salt",
+                                    IngredientPrice = 10,
+                                    Amount = 17,
+                                    Measure = "kg"
+                                },
+                                  new Ingredient()
+                                  {
+                                      IngredientId = 11,
+                                      IngredientName = "Peper",
+                                      IngredientPrice = 10,
+                                      Amount = 20,
+                                      Measure = "kg"
+                                  }
+  );
+
+            //Recipes
+            modelBuilder.Entity<Recipe>().HasData(
+               new Recipe()
+               {
+                   RecipeId = 1,
+                   RecipeName = "Nutella pancakes",
+                   Description = "The process is simple!....",
+                   TotalPrice = 5,
+                   CategoryId = 1
+               },
+               new Recipe()
+               {
+                   RecipeId = 2,
+                   RecipeName = "Protein pancakes",
+                   Description = "The process is simple! ...",
+                   TotalPrice = 6,
+                   CategoryId = 1
+               },
+                 new Recipe()
+                 {
+                     RecipeId = 3,
+                     RecipeName = "Rafaelo pancakes",
+                     Description = "The process is simple!.....",
+                     TotalPrice = 7,
+                     CategoryId = 1
+                 }
+
+
+               );
+
+
+            //recipeDetail
+            modelBuilder.Entity<RecipeDetail>().HasData(
+                new RecipeDetail()
+                {
+                    RecipeDetailId = 1,
+                    RecipeId = 1,
+                    IngredientId = 1,
+                    Amount = 3,
+                    Measure = "kom",
+                    Price = 1
+                },
+                  new RecipeDetail()
+                  {
+                      RecipeDetailId = 2,
+                      RecipeId = 1,
+                      IngredientId = 2,
+                      Amount = 3,
+                      Measure = "l",
+                      Price = 1
+                  },
+                  new RecipeDetail()
+                  {
+                      RecipeDetailId = 3,
+                      RecipeId = 1,
+                      IngredientId = 3,
+                      Amount = 20,
+                      Measure = "g",
+                      Price = 1
+                  },
+
+                  //rec2
+                  new RecipeDetail()
+                  {
+                      RecipeDetailId = 4,
+                      RecipeId = 2,
+                      IngredientId = 1,
+                      Amount = 3,
+                      Measure = "kom",
+                      Price = 1
+                  },
+                  new RecipeDetail()
+                  {
+                      RecipeDetailId = 5,
+                      RecipeId = 2,
+                      IngredientId = 2,
+                      Amount = 3,
+                      Measure = "l",
+                      Price = 1
+                  },
+                  new RecipeDetail()
+                  {
+                      RecipeDetailId = 6,
+                      RecipeId = 2,
+                      IngredientId = 3,
+                      Amount = 20,
+                      Measure = "g",
+                      Price = 1
+                  }
+
+                  
+
+                );
+
         }
     }
 }

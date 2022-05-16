@@ -11,6 +11,8 @@ namespace API.Models
         public string IngredientName { get; set; }
         public decimal IngredientPrice { get; set; }
         public int Amount { get; set; }
+        public string Measure { get; set; }
+
 
     }
 }

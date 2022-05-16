@@ -47,12 +47,12 @@ namespace API.Services
 
             var query = _context.Recipes.Include(x=>x.Category).Where(y=>y.CategoryId==categoryId).ProjectTo<Models.Recipe>(_mapper.ConfigurationProvider)
              .AsQueryable().AsNoTracking();
-            //query = paginationP.OrderBy switch
-            //{
-                
-            //    _ => query.OrderByDescending(u => u.TotalPrice)
+            query = paginationP.OrderBy switch
+            {
 
-            //};
+                _ => query.OrderBy(u => u.TotalPrice)
+
+            };
             return await PagedList<Models.Recipe>.CreateAsync(query, paginationP.PageNumber, paginationP.PageSize);
 
 

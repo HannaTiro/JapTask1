@@ -57,8 +57,8 @@ namespace API.Migrations
                             AppUserId = 1,
                             FirstName = "Hanna",
                             LastName = "Tiro",
-                            PasswordHash = "tRVRLbtDkdunkcWNWyjoMGipdOM=",
-                            PasswordSalt = "MG7ot+HqsOJk/+X/GU5+EQ==",
+                            PasswordHash = "JXrkcmVp44bGr/UHHaMyecKVHtY=",
+                            PasswordSalt = "RiiHQ3XGHctnPOb7/bxDzQ==",
                             Username = "hanna"
                         },
                         new
@@ -66,8 +66,8 @@ namespace API.Migrations
                             AppUserId = 2,
                             FirstName = "Belma",
                             LastName = "Nukic",
-                            PasswordHash = "/C3hMPysVUXZCmQXOYQICydT5bY=",
-                            PasswordSalt = "BKxxJB63LIJ55Y1M4LrPXw==",
+                            PasswordHash = "SE2RJHcDP9iTB1Qp5Z+8bddBPLk=",
+                            PasswordSalt = "sLspPZEVL0HbIHL6/WCqmA==",
                             Username = "belma"
                         });
                 });
@@ -164,9 +164,102 @@ namespace API.Migrations
                     b.Property<decimal>("IngredientPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Measure")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("IngredientId");
 
                     b.ToTable("Ingredient");
+
+                    b.HasData(
+                        new
+                        {
+                            IngredientId = 1,
+                            Amount = 9,
+                            IngredientName = "Eggs",
+                            IngredientPrice = 5m,
+                            Measure = "kom"
+                        },
+                        new
+                        {
+                            IngredientId = 2,
+                            Amount = 170,
+                            IngredientName = "Milk",
+                            IngredientPrice = 200m,
+                            Measure = "l"
+                        },
+                        new
+                        {
+                            IngredientId = 3,
+                            Amount = 50,
+                            IngredientName = "Flour",
+                            IngredientPrice = 70m,
+                            Measure = "kg"
+                        },
+                        new
+                        {
+                            IngredientId = 4,
+                            Amount = 2,
+                            IngredientName = "Chicken",
+                            IngredientPrice = 16m,
+                            Measure = "kg"
+                        },
+                        new
+                        {
+                            IngredientId = 5,
+                            Amount = 2,
+                            IngredientName = "Beef",
+                            IngredientPrice = 20m,
+                            Measure = "kg"
+                        },
+                        new
+                        {
+                            IngredientId = 6,
+                            Amount = 5,
+                            IngredientName = "Cheese",
+                            IngredientPrice = 20m,
+                            Measure = "kg"
+                        },
+                        new
+                        {
+                            IngredientId = 7,
+                            Amount = 3,
+                            IngredientName = "Yogurt",
+                            IngredientPrice = 7m,
+                            Measure = "l"
+                        },
+                        new
+                        {
+                            IngredientId = 8,
+                            Amount = 10,
+                            IngredientName = "Patatoes",
+                            IngredientPrice = 30m,
+                            Measure = "kg"
+                        },
+                        new
+                        {
+                            IngredientId = 9,
+                            Amount = 10,
+                            IngredientName = "Spinach",
+                            IngredientPrice = 10m,
+                            Measure = "kg"
+                        },
+                        new
+                        {
+                            IngredientId = 10,
+                            Amount = 17,
+                            IngredientName = "Salt",
+                            IngredientPrice = 10m,
+                            Measure = "kg"
+                        },
+                        new
+                        {
+                            IngredientId = 11,
+                            Amount = 20,
+                            IngredientName = "Peper",
+                            IngredientPrice = 10m,
+                            Measure = "kg"
+                        });
                 });
 
             modelBuilder.Entity("API.Entities.Recipe", b =>
@@ -197,6 +290,32 @@ namespace API.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Recipe");
+
+                    b.HasData(
+                        new
+                        {
+                            RecipeId = 1,
+                            CategoryId = 1,
+                            Description = "The process is simple!....",
+                            RecipeName = "Nutella pancakes",
+                            TotalPrice = 5m
+                        },
+                        new
+                        {
+                            RecipeId = 2,
+                            CategoryId = 1,
+                            Description = "The process is simple! ...",
+                            RecipeName = "Protein pancakes",
+                            TotalPrice = 6m
+                        },
+                        new
+                        {
+                            RecipeId = 3,
+                            CategoryId = 1,
+                            Description = "The process is simple!.....",
+                            RecipeName = "Rafaelo pancakes",
+                            TotalPrice = 7m
+                        });
                 });
 
             modelBuilder.Entity("API.Entities.RecipeDetail", b =>
@@ -230,6 +349,62 @@ namespace API.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("RecipeDetail");
+
+                    b.HasData(
+                        new
+                        {
+                            RecipeDetailId = 1,
+                            Amount = 3,
+                            IngredientId = 1,
+                            Measure = "kom",
+                            Price = 1m,
+                            RecipeId = 1
+                        },
+                        new
+                        {
+                            RecipeDetailId = 2,
+                            Amount = 3,
+                            IngredientId = 2,
+                            Measure = "l",
+                            Price = 1m,
+                            RecipeId = 1
+                        },
+                        new
+                        {
+                            RecipeDetailId = 3,
+                            Amount = 20,
+                            IngredientId = 3,
+                            Measure = "g",
+                            Price = 1m,
+                            RecipeId = 1
+                        },
+                        new
+                        {
+                            RecipeDetailId = 4,
+                            Amount = 3,
+                            IngredientId = 1,
+                            Measure = "kom",
+                            Price = 1m,
+                            RecipeId = 2
+                        },
+                        new
+                        {
+                            RecipeDetailId = 5,
+                            Amount = 3,
+                            IngredientId = 2,
+                            Measure = "l",
+                            Price = 1m,
+                            RecipeId = 2
+                        },
+                        new
+                        {
+                            RecipeDetailId = 6,
+                            Amount = 20,
+                            IngredientId = 3,
+                            Measure = "g",
+                            Price = 1m,
+                            RecipeId = 2
+                        });
                 });
 
             modelBuilder.Entity("API.Entities.Recipe", b =>
