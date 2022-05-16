@@ -10,7 +10,7 @@ namespace API.Interfaces
 {
    public interface IRecipeService
     {
-        List<Models.Recipe> GetRecipes();
+       List<Models.Recipe> GetRecipes();
        Task< Models.Recipe> GetRecipeById(int id);
         Models.Recipe GetRecipeByName(string recipeName);
 
@@ -18,6 +18,8 @@ namespace API.Interfaces
        Task<List<Recipe>> GetByCategory(int id);
         Task<ActionResult<Entities.Recipe>> InsertRecipe(Models.Recipe request);
         List<Models.RecipeDetail> GetIngredients(int recipeId);
+
+       // List<Models.Recipe> GetRecipesSearch(RecipeSearchRequest request);
 
     }
 }

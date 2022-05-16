@@ -16,7 +16,7 @@ import { CategoryCardComponent } from './members/category-card/category-card.com
 import { RecipeCardComponent } from './members/recipe-card/recipe-card.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { IngredientsRecipeAddComponent } from './members/ingredients-recipe-add/ingredients-recipe-add.component';
-
+import{PaginationModule} from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,8 @@ import { IngredientsRecipeAddComponent } from './members/ingredients-recipe-add/
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
