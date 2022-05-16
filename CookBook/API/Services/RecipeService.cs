@@ -1,8 +1,10 @@
 ﻿using API.Entities;
+using API.Helper;
 using API.Interfaces;
 using API.Models;
 using API.Requests.Recipe;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -33,10 +35,30 @@ namespace API.Services
         {
             var recipes = _context.Recipes.Include(x => x.Category).AsQueryable();
             recipes = recipes.Where(y => y.Category.CategoryName.Equals(categoryName));
+            
             var list = recipes.ToList();
             return _mapper.Map<List<Models.Recipe>>(recipes);
 
         }
+
+        public async Task<PagedList<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId,PaginationParams paginationP)
+        {
+           
+
+            var query = _context.Recipes.Include(x=>x.Category).Where(y=>y.CategoryId==categoryId).ProjectTo<Models.Recipe>(_mapper.ConfigurationProvider)
+             .AsQueryable().AsNoTracking();
+            //query = paginationP.OrderBy switch
+            //{
+                
+            //    _ => query.OrderByDescending(u => u.TotalPrice)
+
+            //};
+            return await PagedList<Models.Recipe>.CreateAsync(query, paginationP.PageNumber, paginationP.PageSize);
+
+
+        }
+
+      
 
         public async Task< Models.Recipe> GetRecipeById(int id)
         {

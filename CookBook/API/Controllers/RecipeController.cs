@@ -1,4 +1,6 @@
-﻿using API.Interfaces;
+﻿using API.Extentions;
+using API.Helper;
+using API.Interfaces;
 using API.Models;
 using API.Requests.Recipe;
 using Microsoft.AspNetCore.Mvc;
@@ -65,6 +67,18 @@ namespace API.Controllers
         public List<Models.RecipeDetail> GetIngredients(int recipeId)
         {
             return _service.GetIngredients(recipeId);
+        }
+
+        [HttpGet("getRecipesPage/{categoryId}")]
+
+       
+        public async Task<ActionResult<IEnumerable<Models.Recipe>>> GetRecipeByCategoryPaged(int categoryId, [FromQuery] PaginationParams paginationP)
+
+        {
+            var recipes = await _service.GetRecipeByCategoryPaged(categoryId, paginationP);
+            Response.AddPaginationHeader(recipes.CurrentPage, recipes.PageSize, recipes.TotalCount, recipes.TotalPages);
+            return Ok(recipes);
+
         }
 
 

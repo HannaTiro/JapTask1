@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/_models/category';
+import { Pagination } from 'src/app/_models/pagination';
 import { Recipe } from 'src/app/_models/recipe';
 import { CategoriesService } from 'src/app/_services/categories.service';
 import { RecipesService } from 'src/app/_services/recipes.service';
@@ -15,13 +16,16 @@ export class RecipesListComponent implements OnInit {
   recipes: Recipe[];
   categoryName: string;
   categoryId;
+  pagination:Pagination;
+  pageNumber=1;
+  pageSize=10;
   constructor(private categoryService: CategoriesService, private route: ActivatedRoute, private recipeService: RecipesService) {
     this.categoryId = this.route.snapshot.paramMap.get('categoryId');
   }
 
   ngOnInit(): void {
    // this.loadCategoryName();
-    this.getRecipes();
+    this.loadRecipes();
   }
   
   loadCategoryName() {
@@ -31,11 +35,24 @@ export class RecipesListComponent implements OnInit {
     })
   }
 
-  getRecipes() {
+/*   getRecipes() {
     this.recipeService.getRecipes(this.categoryId).subscribe(recipes => {
       this.recipes = recipes;
     })
+  }  */
+
+  //nova
+  loadRecipes(){
+    this.recipeService.getRecipesPaged(this.categoryId,this.pageNumber,this.pageSize).subscribe(recipe=>{
+      this.recipes=recipe.result;
+      this.pagination=recipe.pagination;
+    })
   }
+  pageChanged(event:any)
+{
+  this.pageNumber=event.page;
+  this.loadRecipes();
+}
 }
 
 

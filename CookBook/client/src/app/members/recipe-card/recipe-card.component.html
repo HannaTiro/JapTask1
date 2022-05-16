@@ -1,16 +1,18 @@
 
-<div class="card mb-4">
+<div class="card md-4">
     <div class="card-img-wrapper">
-       <img class="card-img-top" alt="Recipe name">
+      
        <ul class="list-inline recipe-icons animate text.canter">
 <li class="list-inline-item">
-<button class="btn btn-primary" routerLink="/recipe/{{recipe.recipeId}}" >
-        <i class="fa-solid fa-check"></i>
+<button class="btn btn-primary" routerLink="/recipe/{{recipe.recipeId}}" style="width: 180px; height: 50px;" >
+      Check out details
     </button>
 </li>
        </ul>
     
+
     </div>
+   
     <div class="card-body p-1">
         <h6 class="card-title text-center mb-1">
             {{recipe.recipeName}}

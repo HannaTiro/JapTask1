@@ -1,4 +1,5 @@
-﻿using API.Models;
+﻿using API.Helper;
+using API.Models;
 using API.Requests.Recipe;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,6 +20,7 @@ namespace API.Interfaces
         Task<ActionResult<Entities.Recipe>> InsertRecipe(Models.Recipe request);
         List<Models.RecipeDetail> GetIngredients(int recipeId);
 
+        Task<PagedList<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId, PaginationParams paginationP);
        // List<Models.Recipe> GetRecipesSearch(RecipeSearchRequest request);
 
     }
