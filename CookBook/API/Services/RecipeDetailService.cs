@@ -28,7 +28,6 @@ namespace API.Services
             var list = request.ToList();
             return _mapper.Map<List<Models.RecipeDetail>>(list);
 
-
         }
 
         public  async Task<ActionResult<Models.RecipeDetail>> InsertIngredient(int recipeId, InsertIngredientRequest request)
@@ -39,7 +38,7 @@ namespace API.Services
             
                 var entity = new RecipeDetail
                 {
-                    RecipeId = recipe.RecipeId,
+                    RecipeId = recipeId,
                     Amount = request.Amount,
                     IngredientId = request.IngredientId,
                     Measure = request.Measure
@@ -49,15 +48,31 @@ namespace API.Services
                 };
             // entity.Price = GetPrice(entity.RecipeDetai entity.IngredientId);
            entity.Price = GetPrice(request.Measure, request.Amount, request.IngredientId);
+            
                 _context.RecipeDetails.Add(entity);
                  await  _context.SaveChangesAsync();
-             
-           
-                return _mapper.Map<Models.RecipeDetail>(entity);
+
+            var recipef = _context.Recipes.Find(recipeId);
+
+            recipef.TotalPrice = GetTotalPrice(recipeId);
+                 await _context.SaveChangesAsync();
+
+
+            return _mapper.Map<Models.RecipeDetail>(entity);
             
             
            }
-
+        public decimal GetTotalPrice(int recipeId)
+        {
+            var obj = _context.RecipeDetails.Where(x => x.RecipeId == recipeId).ToList();
+            decimal price = 0;
+            foreach (var item in obj)
+            {
+                if(item!=null)
+                price += (decimal)item.Price;
+            }
+            return price;
+        }
         public  decimal GetPrice(string measure, int amount,int ingredientId)
         {
          //   var recipeDetail = _context.RecipeDetails.Find(recipeDetailId);

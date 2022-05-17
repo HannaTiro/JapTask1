@@ -2,7 +2,7 @@
 
 namespace API.Migrations
 {
-    public partial class init : Migration
+    public partial class test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,7 @@ namespace API.Migrations
                     RecipeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RecipeName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -84,7 +84,7 @@ namespace API.Migrations
                     IngredientId = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
                     Measure = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,8 +108,8 @@ namespace API.Migrations
                 columns: new[] { "AppUserId", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "Username" },
                 values: new object[,]
                 {
-                    { 1, "Hanna", "Tiro", "JXrkcmVp44bGr/UHHaMyecKVHtY=", "RiiHQ3XGHctnPOb7/bxDzQ==", "hanna" },
-                    { 2, "Belma", "Nukic", "SE2RJHcDP9iTB1Qp5Z+8bddBPLk=", "sLspPZEVL0HbIHL6/WCqmA==", "belma" }
+                    { 1, "Hanna", "Tiro", "O1H6m+uiDCVlRrgjQkNJG34+iOQ=", "gZm3PpKd3Jt2gP1ixpgiSg==", "hanna" },
+                    { 2, "Belma", "Nukic", "M2OfsF5flecx3vKbLoLhG7L0fdI=", "KVltk8QD3kUzxNN11NOfoQ==", "belma" }
                 });
 
             migrationBuilder.InsertData(

@@ -12,7 +12,7 @@ namespace API.Entities
         public int IngredientId { get; set; }
         public int Amount { get; set; }
         public string Measure { get; set; }
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
 
         public virtual Ingredient Ingredient { get; set; }
         public virtual Recipe Recipe { get; set; }
