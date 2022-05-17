@@ -31,7 +31,7 @@ namespace API.Services
 
         }
 
-        public async Task<ActionResult<Models.RecipeDetail>> InsertIngredient(int recipeId, InsertIngredientRequest request)
+        public  async Task<ActionResult<Models.RecipeDetail>> InsertIngredient(int recipeId, InsertIngredientRequest request)
         {
       
             
@@ -43,14 +43,57 @@ namespace API.Services
                     Amount = request.Amount,
                     IngredientId = request.IngredientId,
                     Measure = request.Measure
+                   
+                  
 
                 };
-          //  entity.Price= //formula
+            // entity.Price = GetPrice(entity.RecipeDetai entity.IngredientId);
+           entity.Price = GetPrice(request.Measure, request.Amount, request.IngredientId);
                 _context.RecipeDetails.Add(entity);
-              await  _context.SaveChangesAsync();
+                 await  _context.SaveChangesAsync();
+             
+           
                 return _mapper.Map<Models.RecipeDetail>(entity);
             
             
            }
+
+        public  decimal GetPrice(string measure, int amount,int ingredientId)
+        {
+         //   var recipeDetail = _context.RecipeDetails.Find(recipeDetailId);
+            var ingredient = _context.Ingredients.Find(ingredientId);
+
+            // var recipeDetailUnit = recipeDetail.Measure;
+            //var recipeDetailAmount = recipeDetail.Amount;
+            var recipeDetailUnit = measure;
+            var recipeDetailAmount = amount;
+            var ingredientAmount = ingredient.Amount;
+            var ingredientUnit = ingredient.Measure;
+            if(ingredientAmount!=0 && recipeDetailAmount!=0)
+            { 
+            if(recipeDetailUnit== ingredientUnit)
+            {
+                  return  ingredient.IngredientPrice/(ingredientAmount / recipeDetailAmount);
+                
+            }
+            else
+            { 
+                if((recipeDetailUnit=="kg" && ingredientUnit == "g") || (recipeDetailUnit == "l" && ingredientUnit == "ml"))
+                {
+                    var convert = recipeDetailAmount * 1000;
+                    return ingredient.IngredientPrice / (ingredientAmount / convert);
+                }
+                else if((recipeDetailUnit == "g" && ingredientUnit == "kg" ) || (recipeDetailUnit == "ml" && ingredientUnit == "l"))
+                {
+                    var convert = ingredientAmount * 1000;
+                        var convert2 = convert / recipeDetailAmount;
+                        return ingredient.IngredientPrice / convert2;
+
+                }
+              
+            }
+            }
+            return 0;
+        }
     }
 }
