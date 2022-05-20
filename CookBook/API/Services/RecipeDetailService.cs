@@ -4,7 +4,6 @@ using API.Requests.RecipeDetail;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,46 +21,39 @@ namespace API.Services
             _mapper = mapper;
         }
 
-        public List<Models.RecipeDetail> GetIngredients(int recipeId)
+        public async Task<List<Models.RecipeDetail>> GetIngredients(int recipeId)
         {
-            var request = _context.RecipeDetails.Include(x => x.Recipe).Include(x => x.Ingredient).Where(x => x.Recipe.RecipeId == recipeId).AsQueryable();
-            var list = request.ToList();
+            var request = _context.RecipeDetails.Include(x => x.Recipe).Include(x => x.Ingredient).Where(x => x.Recipe.Id == recipeId).AsQueryable();
+            var list =  await request.ToListAsync();
             return _mapper.Map<List<Models.RecipeDetail>>(list);
 
         }
 
         public  async Task<ActionResult<Models.RecipeDetail>> InsertIngredient(int recipeId, InsertIngredientRequest request)
         {
-      
-            
-             var recipe = _context.Recipes.Find(recipeId);
+                var recipe = _context.Recipes.Find(recipeId);
             
                 var entity = new RecipeDetail
                 {
                     RecipeId = recipeId,
                     Amount = request.Amount,
-                    IngredientId = request.IngredientId,
+                    IngredientId = request.Id,
                     Measure = request.Measure
-                   
-                  
-
                 };
             // entity.Price = GetPrice(entity.RecipeDetai entity.IngredientId);
-           entity.Price = GetPrice(request.Measure, request.Amount, request.IngredientId);
-            
-                _context.RecipeDetails.Add(entity);
-                 await  _context.SaveChangesAsync();
+               entity.Price = GetPrice(request.Measure, request.Amount, request.Id);
+               
+            _context.RecipeDetails.Add(entity);
+            await  _context.SaveChangesAsync();
 
             var recipef = _context.Recipes.Find(recipeId);
 
             recipef.TotalPrice = GetTotalPrice(recipeId);
-                 await _context.SaveChangesAsync();
-
+            await _context.SaveChangesAsync();
 
             return _mapper.Map<Models.RecipeDetail>(entity);
             
-            
-           }
+        }
         public decimal GetTotalPrice(int recipeId)
         {
             var obj = _context.RecipeDetails.Where(x => x.RecipeId == recipeId).ToList();
@@ -82,13 +74,13 @@ namespace API.Services
             //var recipeDetailAmount = recipeDetail.Amount;
             var recipeDetailUnit = measure;
             var recipeDetailAmount = amount;
-            var ingredientAmount = ingredient.Amount;
-            var ingredientUnit = ingredient.Measure;
+            var ingredientAmount = ingredient.PurchaseAmount;
+            var ingredientUnit = ingredient.PurchaseMeasure;
             if(ingredientAmount!=0 && recipeDetailAmount!=0)
             { 
             if(recipeDetailUnit== ingredientUnit)
             {
-                  return  ingredient.IngredientPrice/(ingredientAmount / recipeDetailAmount);
+                  return  ingredient.PurchasePrice/(ingredientAmount / recipeDetailAmount);
                 
             }
             else
@@ -96,13 +88,13 @@ namespace API.Services
                 if((recipeDetailUnit=="kg" && ingredientUnit == "g") || (recipeDetailUnit == "l" && ingredientUnit == "ml"))
                 {
                     var convert = recipeDetailAmount * 1000;
-                    return ingredient.IngredientPrice / (ingredientAmount / convert);
+                    return ingredient.PurchasePrice / (ingredientAmount / convert);
                 }
                 else if((recipeDetailUnit == "g" && ingredientUnit == "kg" ) || (recipeDetailUnit == "ml" && ingredientUnit == "l"))
                 {
                     var convert = ingredientAmount * 1000;
                         var convert2 = convert / recipeDetailAmount;
-                        return ingredient.IngredientPrice / convert2;
+                        return ingredient.PurchasePrice / convert2;
 
                 }
               

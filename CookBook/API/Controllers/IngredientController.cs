@@ -1,32 +1,30 @@
 ﻿using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Ingredients")]
     [ApiController]
     public class IngredientController : ControllerBase
     {
-        private readonly IIngredientService _service;
+        private readonly IIngredientService _ingredientService;
 
-        public IngredientController(IIngredientService service)
+        public IngredientController(IIngredientService ingredientService)
         {
-            _service = service;
+            _ingredientService = ingredientService;
         }
 
         [HttpGet("getAll")]
-        public async Task<List<Models.Ingredient>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return await _service.GetAll();
+            return Ok( await _ingredientService.GetAll());
         }
         [HttpGet("getUnits")]
         public List<string> GetUnits()
         {
-            return _service.GetUnits();
+            return _ingredientService.GetUnits();
         }
 
 

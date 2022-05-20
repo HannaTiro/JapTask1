@@ -1,72 +1,68 @@
 ﻿using API.Extentions;
 using API.Helper;
 using API.Interfaces;
-using API.Models;
-using API.Requests.Recipe;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Recipes")]
     [ApiController]
     public class RecipeController : ControllerBase
     {
-        private readonly IRecipeService _service;
+        private readonly IRecipeService _recipeService;
 
-        public RecipeController(IRecipeService service)
+        public RecipeController(IRecipeService recipeService)
         {
-            _service = service;
+            _recipeService = recipeService;
         }
 
         [HttpGet]
-        public ActionResult<List<Models.Recipe>> GetRecipes()
+        public async Task<ActionResult<IActionResult>> GetRecipes()
         {
-            return _service.GetRecipes();
+            return Ok(await _recipeService.GetRecipes());
         }
 
         //  [HttpGet("{recipeName}")]
         [HttpGet("recipeName")]
-        public Models.Recipe GetCategoryByName(string recipeName)
+        public async Task<IActionResult>  GetCategoryByName(string recipeName)
         {
-            return _service.GetRecipeByName(recipeName);
+            return Ok(await _recipeService.GetRecipeByName(recipeName));
         }
 
         [HttpGet("getByCategory/{categoryId}")]
         public async Task<IActionResult> GetByCategory(int categoryId)
         {
-            return Ok(await _service.GetByCategory(categoryId));
+            return Ok(await _recipeService.GetByCategory(categoryId));
         }
 
         [HttpGet("{categoryName}")]
 
         // [HttpGet("categoryName")]
-        public List<Models.Recipe> GetRecipeByCategory(string categoryName)
+        public async Task<IActionResult>  GetRecipeByCategory(string categoryName)
         {
-            return _service.GetRecipeByCategory(categoryName);
+            return Ok(await _recipeService.GetRecipeByCategory(categoryName));
         }
 
         [HttpGet("getById/{id}")]
         public async Task<Models.Recipe> GetRecipeById(int id)
         {
-            return await _service.GetRecipeById(id);
+            return await _recipeService.GetRecipeById(id);
         }
 
         [HttpPost("addRecipe")]
         public async Task<IActionResult> InsertRecipe([FromBody]Models.Recipe request)
         {
 
-            return Ok(await _service.InsertRecipe(request));
+            return Ok(await _recipeService.InsertRecipe(request));
         }
 
 
         [HttpGet("getIngredientsRecipe/{recipeId}")]
-        public List<Models.RecipeDetail> GetIngredients(int recipeId)
+        public async Task<IActionResult> GetIngredients(int recipeId)
         {
-            return _service.GetIngredients(recipeId);
+            return Ok(await _recipeService.GetIngredients(recipeId));
         }
 
         [HttpGet("getRecipesPage/{categoryId}")]
@@ -75,7 +71,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<Models.Recipe>>> GetRecipeByCategoryPaged(int categoryId, [FromQuery] PaginationParams paginationP)
 
         {
-            var recipes = await _service.GetRecipeByCategoryPaged(categoryId, paginationP);
+            var recipes = await _recipeService.GetRecipeByCategoryPaged(categoryId, paginationP);
             Response.AddPaginationHeader(recipes.CurrentPage, recipes.PageSize, recipes.TotalCount, recipes.TotalPages);
             return Ok(recipes);
 

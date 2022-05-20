@@ -1,34 +1,32 @@
 ﻿using API.Interfaces;
 using API.Requests.RecipeDetail;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/RecipeDetails")]
     [ApiController]
     public class RecipeDetailController:ControllerBase
     {
-        private readonly IRecipeDetailService _service;
+        private readonly IRecipeDetailService _recipeDetailService;
 
-        public RecipeDetailController(IRecipeDetailService service)
+        public RecipeDetailController(IRecipeDetailService recipeDetailService)
         {
-            _service = service;
+            _recipeDetailService = recipeDetailService;
         }
 
         [HttpGet("getIngredientsRecipe/{recipeId}")]
-      public  List<Models.RecipeDetail> GetIngredients(int recipeId)
+        public async Task<IActionResult> GetIngredients(int recipeId)
         {
-            return _service.GetIngredients(recipeId);
+            return Ok(await _recipeDetailService.GetIngredients(recipeId));
         }
 
         [HttpPost("addIngredient/{recipeId}")]
         public async Task<IActionResult> InsertIngredient(int recipeId, [FromBody]InsertIngredientRequest request)
         {
-            return Ok(await _service.InsertIngredient(recipeId, request));
+            return Ok(await _recipeDetailService.InsertIngredient(recipeId, request));
         }
 
 

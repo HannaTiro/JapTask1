@@ -1,45 +1,39 @@
 ﻿using API.Extentions;
 using API.Helper;
 using API.Interfaces;
-using API.Models;
-using API.Requests.Category;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-   [Route("api/[controller]")]
+    [Route("api/Categories")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryService _service;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryService service)
+        public CategoryController(ICategoryService categoryService)
         {
-            _service = service;
+            _categoryService = categoryService;
         }
+        
+        //get(), get(id), post(obj), put(id, obj), delete(id)
 
         [HttpGet]
-      
-        public  ActionResult<IEnumerable<Models.Category>> GetCategories()
-        {
-
-            return _service.GetCategories();
-
+        public async Task<IActionResult> GetAll()
+        {  
+            return Ok(await _categoryService.GetCategories());
         }
 
 
-        [HttpGet("getCategoriesPag")]
-
-        public async Task<ActionResult<IEnumerable<Models.Category>>> GetCategoriesPag([FromQuery] PaginationParams paginationP)
+        [HttpGet("page")]
+        public async Task<IActionResult> GetPage([FromQuery] PaginationParams paginationP)
         {
-            var categories = await _service.GetCategoriesPag(paginationP);
+            var categories = await _categoryService.GetCategoriesPag(paginationP);
+            
             Response.AddPaginationHeader(categories.CurrentPage, categories.PageSize, categories.TotalCount, categories.TotalPages);
-            return Ok(categories);
 
+            return Ok(categories);
         }
 
         //[HttpGet("{id}")]
@@ -51,9 +45,9 @@ namespace API.Controllers
 
         [HttpGet("{categoryName}")]
 
-        public Models.Category GetCategoryByName(string categoryName)
+        public async Task<IActionResult> GetCategoryByName(string categoryName)
         {
-            return _service.GetCategoryByName(categoryName);
+            return Ok(await _categoryService.GetCategoryByName(categoryName));
         }
 
     }

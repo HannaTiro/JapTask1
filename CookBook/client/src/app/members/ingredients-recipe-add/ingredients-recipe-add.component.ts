@@ -37,7 +37,7 @@ changeMeasure:any;
 
   initializeForm(){
     this.ingreientAddForm=this.fb.group({
-      ingredientId: ['',Validators.required],
+      id: ['',Validators.required],
       amount:['',Validators.required],
       measure:['',Validators.required ]
 

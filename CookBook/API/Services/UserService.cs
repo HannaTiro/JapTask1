@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace API.Services
 {
-    public class AppUserService:IAppUserService
+    public class UserService:IUserService
     {
         private readonly IMapper _mapper;
         private readonly CookBookContext _context;
 
-        public AppUserService(CookBookContext context, IMapper mapper)
+        public UserService(CookBookContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -40,9 +40,9 @@ namespace API.Services
         //    }
         //    return _mapper.Map<Models.AppUser>(user);
         //}
-        public Models.AppUser Authenticiraj(string username, string pass)
+        public Models.User Authenticiraj(string username, string pass)
         {
-            var user = _context.AppUsers.FirstOrDefault(x => x.Username == username);
+            var user = _context.AppUsers.FirstOrDefault(x => x.UserName == username);
            
             if (user != null) 
             {
@@ -51,14 +51,14 @@ namespace API.Services
                 if (hashedPass == user.PasswordHash)
                 {
                    
-                    Models.AppUser newUser = new Models.AppUser();
+                    Models.User newUser = new Models.User();
 
 
 
                     newUser.FirstName = user.FirstName;
                     newUser.LastName = user.LastName;
-                    newUser.Username = user.Username;
-                    newUser.AppUserId = user.AppUserId;
+                    newUser.UserName = user.UserName;
+                    newUser.Id = user.Id;
 
                   
 
@@ -74,14 +74,14 @@ namespace API.Services
             return null;
         }
 
-        public List<Models.AppUser> GetUsers()
+        public List<Models.User> GetUsers()
         {
             var query = _context.AppUsers.AsQueryable();
 
            
             var list = query.ToList();
 
-            return _mapper.Map<List<Models.AppUser>>(list);
+            return _mapper.Map<List<Models.User>>(list);
         }
 
     }

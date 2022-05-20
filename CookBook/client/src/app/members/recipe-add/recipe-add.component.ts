@@ -36,7 +36,7 @@ this.initializeForm();
 
   initializeForm(){
     this.recipeAddForm=this.fb.group({
-      recipeName: ['',Validators.required],
+      name: ['',Validators.required],
       description:['',Validators.required],
       categoryId:['',Validators.required ]
 

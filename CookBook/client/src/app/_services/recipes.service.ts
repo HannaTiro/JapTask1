@@ -1,10 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Category } from '../_models/category';
 import { ReciepeDetail } from '../_models/reciepeDetail';
 import { Recipe } from '../_models/recipe';
-import { CategoriesService } from './categories.service';
 import { map } from 'rxjs/operators';
 import { PaginatedResult } from '../_models/pagination';
 
@@ -25,7 +23,7 @@ paginatedResult:PaginatedResult<Recipe[]>=new PaginatedResult<Recipe[]>();
  
   getRecipes(categoryId)
   {
-    return this.http.get<Recipe[]>(this.baseUrl + 'recipe/getByCategory/' + categoryId);
+    return this.http.get<Recipe[]>(this.baseUrl + 'recipes/getByCategory/' + categoryId);
   }
 
  
@@ -39,7 +37,7 @@ paginatedResult:PaginatedResult<Recipe[]>=new PaginatedResult<Recipe[]>();
   
     }
     return this.http.get<Recipe[]>
-           (this.baseUrl+'recipe/getRecipesPage/'+categoryId+'/', {observe:'response',params}).pipe(
+           (this.baseUrl+'recipes/getRecipesPage/'+categoryId+'/', {observe:'response',params}).pipe(
              map(response=>{
                this.paginatedResult.result=response.body;
                if(response.headers.get('Pagination')!==null){
@@ -54,18 +52,18 @@ paginatedResult:PaginatedResult<Recipe[]>=new PaginatedResult<Recipe[]>();
 
   getRecipeById(recipeId)
   {
-   return this.http.get<Recipe[]>(this.baseUrl+'Recipe/getById/'+recipeId);
+   return this.http.get<Recipe[]>(this.baseUrl+'Recipes/getById/'+recipeId);
   }
 
   insertRecipe(recipe:Recipe)
   {
     //return this.http.post(this.baseUrl+'addRecipe?'+ recipe,{});
-    return this.http.post(this.baseUrl+'Recipe/addRecipe', recipe);
+    return this.http.post(this.baseUrl+'Recipes/addRecipe', recipe);
 
   }
   getIngredients(recipeId)
   {
-    return this.http.get<ReciepeDetail[]>(this.baseUrl+'Recipe/getIngredientsRecipe/'+recipeId);
+    return this.http.get<ReciepeDetail[]>(this.baseUrl+'Recipes/getIngredientsRecipe/'+recipeId);
   }
 
   

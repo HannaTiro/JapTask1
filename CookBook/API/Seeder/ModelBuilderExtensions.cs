@@ -1,12 +1,7 @@
 ﻿using API.Entities;
 using API.Helper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace API.Seeder
 {
@@ -48,108 +43,108 @@ namespace API.Seeder
             }
           
 
-            AppUser a = new AppUser
+            User a = new User
             {
-                AppUserId = 1,
+                Id=1,
                 FirstName = "Hanna",
                 LastName = "Tiro",
-                Username = "hanna"
+                UserName = "hanna"
 
             };
             a.PasswordSalt = HashGenerator.GenerateSalt();
             a.PasswordHash = HashGenerator.GenerateHash(a.PasswordSalt, "hanna");
-            modelBuilder.Entity<AppUser>().HasData(a);
+            modelBuilder.Entity<User>().HasData(a);
 
             
-            AppUser b = new AppUser
+            User b = new User
             {
-                AppUserId = 2,
+                Id = 2,
                 FirstName = "Belma",
                 LastName = "Nukic",
-                Username = "belma"
+                UserName = "belma"
 
             };
             b.PasswordSalt = HashGenerator.GenerateSalt();
             b.PasswordHash = HashGenerator.GenerateHash(b.PasswordSalt, "belma");
-            modelBuilder.Entity<AppUser>().HasData(b);
+            modelBuilder.Entity<User>().HasData(b);
 
             //Category
 
             Category cat1= new Category
             {
-                CategoryId = 1,
-                CategoryName = "Pancakes"
+               Id=1,
+                Name = "Pancakes"
             };
             modelBuilder.Entity<Category>().HasData(cat1);
 
             Category cat2 = new Category
             {
-                CategoryId = 2,
-                CategoryName = "Waffles"
+                Id = 2,
+                Name = "Waffles"
             };
             modelBuilder.Entity<Category>().HasData(cat2);
 
             Category cat3 = new Category
             {
-                CategoryId = 3,
-                CategoryName = "Pizzas"
+                Id = 3,
+                Name = "Pizzas"
             };
             modelBuilder.Entity<Category>().HasData(cat3);
 
 
             Category cat4 = new Category
             {
-                CategoryId = 4,
-                CategoryName = "Fish"
+                Id = 4,
+                Name = "Fish"
             };
             modelBuilder.Entity<Category>().HasData(cat4);
 
             Category cat5 = new Category
             {
-                CategoryId = 5,
-                CategoryName = "Sushi"
+                Id = 5,
+                Name = "Sushi"
             };
             modelBuilder.Entity<Category>().HasData(cat5);
 
             Category cat6 = new Category
             {
-                CategoryId = 6,
-                CategoryName = "Sandwiches"
+                Id = 6,
+                Name = "Sandwiches"
             };
             modelBuilder.Entity<Category>().HasData(cat6);
 
             Category cat7 = new Category
             {
-                CategoryId = 7,
-                CategoryName = "Meat"
+               Id=7,
+                Name = "Meat"
             };
             modelBuilder.Entity<Category>().HasData(cat7);
 
             Category cat8 = new Category
             {
-                CategoryId = 8,
-                CategoryName = "Pasta"
+                Id = 8,
+                Name = "Pasta"
             };
             modelBuilder.Entity<Category>().HasData(cat8);
 
             Category cat9 = new Category
             {
-                CategoryId = 9,
-                CategoryName = "Asian food"
+                Id = 9,
+                Name = "Asian food"
             };
             modelBuilder.Entity<Category>().HasData(cat9);
 
             Category cat10 = new Category
             {
-                CategoryId = 10,
-                CategoryName = "Taccos"
+                Id = 10,
+                Name = "Taccos"
             };
             modelBuilder.Entity<Category>().HasData(cat10);
 
             Category cat11 = new Category
             {
-                CategoryId =11,
-                CategoryName = "Barbeque"
+                Id =11,
+                Name = "Barbeque"
             };
             modelBuilder.Entity<Category>().HasData(cat11);
 
@@ -158,91 +153,91 @@ namespace API.Seeder
             modelBuilder.Entity<Ingredient>().HasData(
                 new Ingredient()
                 {
-                    IngredientId = 1,
-                    IngredientName = "Eggs",
-                    IngredientPrice = 5,
-                    Amount = 9,
-                    Measure = "kom"
+                    Id = 1,
+                    Name = "Eggs",
+                    PurchasePrice = 5,
+                    PurchaseAmount = 9,
+                    PurchaseMeasure = "kom"
                 },
                 new Ingredient()
                 {
-                    IngredientId = 2,
-                    IngredientName = "Milk",
-                    IngredientPrice = 200,
-                    Amount = 170,
-                    Measure = "l"
+                    Id = 2,
+                    Name = "Milk",
+                    PurchasePrice = 200,
+                    PurchaseAmount = 170,
+                    PurchaseMeasure = "l"
                 },
-                  new Ingredient()
+                new Ingredient()
                   {
-                      IngredientId = 3,
-                      IngredientName = "Flour",
-                      IngredientPrice = 70,
-                      Amount = 50,
-                      Measure = "kg"
+                      Id = 3,
+                      Name = "Flour",
+                      PurchasePrice = 70,
+                      PurchaseAmount = 50,
+                      PurchaseMeasure = "kg"
                   },
-                    new Ingredient()
+                new Ingredient()
                     {
-                        IngredientId = 4,
-                        IngredientName = "Chicken",
-                        IngredientPrice = 16,
-                        Amount = 2,
-                        Measure = "kg"
+                        Id = 4,
+                        Name = "Chicken",
+                        PurchasePrice = 16,
+                        PurchaseAmount = 2,
+                        PurchaseMeasure = "kg"
                     },
-                      new Ingredient()
+                new Ingredient()
                       {
-                          IngredientId = 5,
-                          IngredientName = "Beef",
-                          IngredientPrice = 20,
-                          Amount = 2,
-                          Measure = "kg"
+                          Id = 5,
+                          Name = "Beef",
+                          PurchasePrice = 20,
+                          PurchaseAmount = 2,
+                          PurchaseMeasure = "kg"
                       },
-                        new Ingredient()
+                new Ingredient()
                         {
-                            IngredientId = 6,
-                            IngredientName = "Cheese",
-                            IngredientPrice = 20,
-                            Amount = 5,
-                            Measure = "kg"
+                            Id = 6,
+                            Name = "Cheese",
+                            PurchasePrice = 20,
+                            PurchaseAmount = 5,
+                            PurchaseMeasure = "kg"
                         },
-                          new Ingredient()
+                new Ingredient()
                           {
-                              IngredientId = 7,
-                              IngredientName = "Yogurt",
-                              IngredientPrice = 7,
-                              Amount = 3,
-                              Measure = "l"
+                              Id = 7,
+                              Name = "Yogurt",
+                              PurchasePrice = 7,
+                              PurchaseAmount = 3,
+                              PurchaseMeasure = "l"
                           },
-                            new Ingredient()
+                new Ingredient()
                             {
-                                IngredientId = 8,
-                                IngredientName = "Patatoes",
-                                IngredientPrice = 30,
-                                Amount = 10,
-                                Measure = "kg"
+                                Id = 8,
+                                Name = "Patatoes",
+                                PurchasePrice = 30,
+                                PurchaseAmount = 10,
+                                PurchaseMeasure = "kg"
                             },
-                              new Ingredient()
+                new Ingredient()
                               {
-                                  IngredientId = 9,
-                                  IngredientName = "Spinach",
-                                  IngredientPrice = 10,
-                                  Amount = 10,
-                                  Measure = "kg"
+                                  Id = 9,
+                                  Name = "Spinach",
+                                  PurchasePrice = 10,
+                                  PurchaseAmount = 10,
+                                  PurchaseMeasure = "kg"
                               },
-                                new Ingredient()
+                new Ingredient()
                                 {
-                                    IngredientId = 10,
-                                    IngredientName = "Salt",
-                                    IngredientPrice = 10,
-                                    Amount = 17,
-                                    Measure = "kg"
+                                    Id = 10,
+                                    Name = "Salt",
+                                    PurchasePrice = 10,
+                                    PurchaseAmount = 17,
+                                    PurchaseMeasure = "kg"
                                 },
-                                  new Ingredient()
+                new Ingredient()
                                   {
-                                      IngredientId = 11,
-                                      IngredientName = "Peper",
-                                      IngredientPrice = 10,
-                                      Amount = 20,
-                                      Measure = "kg"
+                                      Id = 11,
+                                      Name = "Peper",
+                                      PurchasePrice = 10,
+                                      PurchaseAmount = 20,
+                                      PurchaseMeasure = "kg"
                                   }
   );
 
@@ -250,24 +245,24 @@ namespace API.Seeder
             modelBuilder.Entity<Recipe>().HasData(
                new Recipe()
                {
-                   RecipeId = 1,
-                   RecipeName = "Nutella pancakes",
+                   Id = 1,
+                   Name = "Nutella pancakes",
                    Description = "The process is simple!....",
                    TotalPrice = 5,
                    CategoryId = 1
                },
                new Recipe()
                {
-                   RecipeId = 2,
-                   RecipeName = "Protein pancakes",
+                   Id = 2,
+                   Name = "Protein pancakes",
                    Description = "The process is simple! ...",
                    TotalPrice = 6,
                    CategoryId = 1
                },
-                 new Recipe()
+               new Recipe()
                  {
-                     RecipeId = 3,
-                     RecipeName = "Rafaelo pancakes",
+                     Id = 3,
+                     Name = "Rafaelo pancakes",
                      Description = "The process is simple!.....",
                      TotalPrice = 7,
                      CategoryId = 1
@@ -281,7 +276,7 @@ namespace API.Seeder
             modelBuilder.Entity<RecipeDetail>().HasData(
                 new RecipeDetail()
                 {
-                    RecipeDetailId = 1,
+                    Id = 1,
                     RecipeId = 1,
                     IngredientId = 1,
                     Amount = 3,
@@ -290,7 +285,7 @@ namespace API.Seeder
                 },
                   new RecipeDetail()
                   {
-                      RecipeDetailId = 2,
+                      Id = 2,
                       RecipeId = 1,
                       IngredientId = 2,
                       Amount = 3,
@@ -299,7 +294,7 @@ namespace API.Seeder
                   },
                   new RecipeDetail()
                   {
-                      RecipeDetailId = 3,
+                      Id = 3,
                       RecipeId = 1,
                       IngredientId = 3,
                       Amount = 20,
@@ -310,7 +305,7 @@ namespace API.Seeder
                   //rec2
                   new RecipeDetail()
                   {
-                      RecipeDetailId = 4,
+                      Id = 4,
                       RecipeId = 2,
                       IngredientId = 1,
                       Amount = 3,
@@ -319,7 +314,7 @@ namespace API.Seeder
                   },
                   new RecipeDetail()
                   {
-                      RecipeDetailId = 5,
+                      Id = 5,
                       RecipeId = 2,
                       IngredientId = 2,
                       Amount = 3,
@@ -328,7 +323,7 @@ namespace API.Seeder
                   },
                   new RecipeDetail()
                   {
-                      RecipeDetailId = 6,
+                      Id = 6,
                       RecipeId = 2,
                       IngredientId = 3,
                       Amount = 20,

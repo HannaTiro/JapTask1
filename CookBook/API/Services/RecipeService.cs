@@ -31,62 +31,52 @@ namespace API.Services
             return _mapper.Map<List<Models.Recipe>>(recipe);
         }
 
-        public List<Models.Recipe> GetRecipeByCategory(string categoryName)
+        public async Task<List<Models.Recipe>> GetRecipeByCategory(string categoryName)
         {
             var recipes = _context.Recipes.Include(x => x.Category).AsQueryable();
-            recipes = recipes.Where(y => y.Category.CategoryName.Equals(categoryName));
+            recipes = recipes.Where(y => y.Category.Name.Equals(categoryName));
             
-            var list = recipes.ToList();
-            return _mapper.Map<List<Models.Recipe>>(recipes);
+            var list = await recipes.ToListAsync();
+            return  _mapper.Map<List<Models.Recipe>>(recipes);
 
         }
 
         public async Task<PagedList<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId,PaginationParams paginationP)
         {
-           
-
             var query = _context.Recipes.Include(x=>x.Category).Where(y=>y.CategoryId==categoryId).ProjectTo<Models.Recipe>(_mapper.ConfigurationProvider)
              .AsQueryable().AsNoTracking();
             query = paginationP.OrderBy switch
             {
-
-                _ => query.OrderBy(u => u.TotalPrice)
-
+               _ => query.OrderBy(u => u.TotalPrice)
             };
             return await PagedList<Models.Recipe>.CreateAsync(query, paginationP.PageNumber, paginationP.PageSize);
 
 
         }
 
-      
-
         public async Task< Models.Recipe> GetRecipeById(int id)
         {
-            var recipe = await _context.Recipes.Include(x=>x.Category).Where(x => x.RecipeId == id).FirstOrDefaultAsync();
+            var recipe = await _context.Recipes.Include(x=>x.Category).Where(x => x.Id == id).FirstOrDefaultAsync();
             return _mapper.Map<Models.Recipe>(recipe);
         }
 
-        public  Models.Recipe GetRecipeByName(string recipeName)
+        public async Task<Models.Recipe> GetRecipeByName(string recipeName)
         {
-            var cat = _context.Recipes.Where(j => j.RecipeName == recipeName).FirstOrDefault();
-
+            var cat = await _context.Recipes.Where(j => j.Name == recipeName).FirstOrDefaultAsync();
             return _mapper.Map<Models.Recipe>(cat);
         }
 
-        public List<Models.Recipe> GetRecipes()
+        public async Task<List<Models.Recipe>> GetRecipes()
         {
-            var query = _context.Recipes.Include(x=>x.Category)
-             .AsQueryable();
-
-
-            var list = query.ToList();
+            var query = _context.Recipes.Include(x=>x.Category).AsQueryable();
+            var list =await query.ToListAsync();
             return _mapper.Map<List<Models.Recipe>>(list);
         }
 
-        public List<Models.RecipeDetail> GetIngredients(int recipeId)
+        public async Task<List<Models.RecipeDetail>> GetIngredients(int recipeId)
         {
-            var request = _context.RecipeDetails.Include(x => x.Recipe).Include(x => x.Ingredient).Where(x => x.Recipe.RecipeId == recipeId).AsQueryable();
-            var list = request.ToList();
+            var request = _context.RecipeDetails.Include(x => x.Recipe).Include(x => x.Ingredient).Where(x => x.Recipe.Id == recipeId).AsQueryable();
+            var list =await request.ToListAsync();
             return _mapper.Map<List<Models.RecipeDetail>>(list);
 
 
@@ -96,15 +86,13 @@ namespace API.Services
         {
             var model = new Entities.Recipe
             {
-                RecipeName = request.RecipeName,
+                Name = request.Name,
                 CategoryId = request.CategoryId,
                 Description = request.Description,
                 TotalPrice=0
                
             };
-
-
-             _context.Recipes.Add(model);
+           _context.Recipes.Add(model);
            await _context.SaveChangesAsync();
 
             return _mapper.Map<Entities.Recipe>(model);

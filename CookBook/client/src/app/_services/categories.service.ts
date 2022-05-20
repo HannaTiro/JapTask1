@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Category } from '../_models/category';
 import { PaginatedResult } from '../_models/pagination';
@@ -24,7 +23,7 @@ paginatedResult:PaginatedResult<Category[]>=new PaginatedResult<Category[]>();
 
   }
   return this.http.get<Category[]>
-         (this.baseUrl+'category/getCategoriesPag', {observe:'response',params}).pipe(
+         (this.baseUrl+'Categories/page', {observe:'response',params}).pipe(
            map(response=>{
              this.paginatedResult.result=response.body;
              if(response.headers.get('Pagination')!==null){
@@ -37,11 +36,11 @@ paginatedResult:PaginatedResult<Category[]>=new PaginatedResult<Category[]>();
 }
 getCategories()
 {
-  return this.http.get<Category[]>(this.baseUrl+'category');
+  return this.http.get<Category[]>(this.baseUrl+'Categories');
 }
 
 
 getCategory(categoryName){
-return this.http.get<Category>(this.baseUrl+'category/'+categoryName);
+return this.http.get<Category>(this.baseUrl+'Categories/'+categoryName);
 }
 }

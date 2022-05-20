@@ -20,18 +20,19 @@ export class RecipesListComponent implements OnInit {
   pageNumber=1;
   pageSize=10;
   constructor(private categoryService: CategoriesService, private route: ActivatedRoute, private recipeService: RecipesService) {
-    this.categoryId = this.route.snapshot.paramMap.get('categoryId');
+    this.categoryId = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
-   // this.loadCategoryName();
+  // this.loadCategoryName();
     this.loadRecipes();
   }
   
   loadCategoryName() {
     this.categoryService.getCategory(this.categoryId).subscribe(category => {
       this.category = category;
-      this.categoryName = category.categoryName;
+      this.categoryName = category.name;
+      
     })
   }
 

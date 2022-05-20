@@ -1,4 +1,4 @@
 export interface Ingredient {
-    ingredientId: number;
-    ingredientName: string;
+    id: number;
+    name: string;
  }

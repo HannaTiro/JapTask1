@@ -11,7 +11,7 @@ import { RecipesListComponent } from './members/recipes-list/recipes-list.compon
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'categories',component:CategoriesListComponent},
-  {path:'recipes/:categoryId',component:RecipesListComponent},
+  {path:'recipes/:id',component:RecipesListComponent},
   {path:'recipe/:recipeId',component:RecipesDetailComponent},
   {path:'recipeAdd',component:RecipeAddComponent},
   {path:'ingredientAdd/:recipeId', component: IngredientsRecipeAddComponent},

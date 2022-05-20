@@ -1,20 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Entities;
-using API.Filters;
 using API.Interfaces;
 using API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace API
@@ -71,9 +63,10 @@ namespace API
             services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<ICategoryService, CategoryService>();
+
              services.AddScoped<IIngredientService, IngredientService>();
              services.AddScoped<IRecipeService, RecipeService>();
-              services.AddScoped<IAppUserService, AppUserService>();
+              services.AddScoped<IUserService, UserService>();
               services.AddScoped<IRecipeDetailService, RecipeDetailService>();
 
 

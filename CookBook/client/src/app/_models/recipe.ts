@@ -1,8 +1,8 @@
 import { Ingredient } from "./ingredient";
 
 export interface Recipe{
-  recipeId:number;
-  recipeName:string;
+  id:number;
+  name:string;
   description:string;
 totalPrice:number;
 categoryId:number;

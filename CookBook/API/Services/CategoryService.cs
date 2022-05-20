@@ -34,12 +34,12 @@ namespace API.Services
             return await PagedList<Models.Category>.CreateAsync(query, paginationP.PageNumber, paginationP.PageSize);
 
         }
-        public  List<Models.Category> GetCategories()
+        public async  Task<List<Models.Category>> GetCategories()
         {
-            var query = _context.Categories
+            var query =  _context.Categories
               .AsQueryable();
             var list = query.ToList();
-            return _mapper.Map<List<Models.Category>>(list);
+            return  _mapper.Map<List<Models.Category>>(list);
 
 
         }
@@ -51,9 +51,9 @@ namespace API.Services
 
         }
 
-        public Models.Category GetCategoryByName(string categoryName)
+        public async Task<Models.Category> GetCategoryByName(string categoryName)
         {
-          var cat= _context.Categories.Where(j => j.CategoryName == categoryName).FirstOrDefault();
+          var cat= await _context.Categories.Where(j => j.Name == categoryName).FirstOrDefaultAsync();
 
             return _mapper.Map<Models.Category>(cat);
 

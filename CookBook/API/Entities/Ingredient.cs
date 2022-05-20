@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 #nullable disable
 
 namespace API.Entities
 {
-    public partial class Ingredient
+    public  class Ingredient:BaseEntity
     {
         public Ingredient()
         {
-            RecipeDetails = new HashSet<RecipeDetail>();
+            RecipeIngredients = new HashSet<RecipeDetail>();
         }
 
-        public int IngredientId { get; set; }
-        public string IngredientName { get; set; }
-        public decimal IngredientPrice { get; set; }
-        public int Amount { get; set; }
-        public string Measure { get; set; }
-
-
-        public virtual ICollection<RecipeDetail> RecipeDetails { get; set; } 
+        
+        public string Name { get; set; }
+        public decimal PurchasePrice { get; set; }
+        public int PurchaseAmount { get; set; }
+        public string PurchaseMeasure { get; set; }
+        public virtual ICollection<RecipeDetail> RecipeIngredients { get; set; } 
     }
 }

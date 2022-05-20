@@ -8,13 +8,13 @@
                     <div>
                         <strong>Ingredient:</strong><br>
                         <select
-                        [class.is-invalid]='ingreientAddForm.get("ingredientId").errors && ingreientAddForm.get("ingredientId").touched'
+                        [class.is-invalid]='ingreientAddForm.get("id").errors && ingreientAddForm.get("id").touched'
                         name="Ingredient"
                         (change)="ChangeIgredient($event)"
-                        formControlName="ingredientId"
+                        formControlName="id"
                         >
                         
-                            <option [value]="ing.ingredientId" *ngFor="let ing of ingredients"> {{ing.ingredientName}}</option>
+                            <option [value]="ing.id" *ngFor="let ing of ingredients"> {{ing.name}}</option>
 
                         </select>
                         <br><br>
