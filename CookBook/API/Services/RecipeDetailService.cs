@@ -28,7 +28,6 @@ namespace API.Services
             return _mapper.Map<List<Models.RecipeDetail>>(list);
 
         }
-
         public  async Task<ActionResult<Models.RecipeDetail>> InsertIngredient(int recipeId, InsertIngredientRequest request)
         {
                 var recipe = _context.Recipes.Find(recipeId);
@@ -101,6 +100,12 @@ namespace API.Services
             }
             }
             return 0;
+        }
+        public async Task<List<Models.RecipeDetail>> GetIngredientsForRecipe(int recipeId)
+        {
+            var request = _context.RecipeDetails.Include(x => x.Recipe).Include(x => x.Ingredient).Where(x => x.Recipe.Id == recipeId).AsQueryable();
+            var list = await request.ToListAsync();
+            return _mapper.Map<List<Models.RecipeDetail>>(list);
         }
     }
 }

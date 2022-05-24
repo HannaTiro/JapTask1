@@ -1,5 +1,8 @@
 using API.Entities;
+using API.Extentions;
 using API.Interfaces;
+using API.Mapping;
+using API.Middleweare;
 using API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,8 +31,8 @@ namespace API
             //{
             //    x.Filters.Add<ErrorFilter>();
             //});
+            services.AddApplicationServices(Configuration);
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-          
             services.AddCors();
             services.AddSwaggerGen(c =>
             {
@@ -58,20 +61,8 @@ namespace API
                     }
                 });
             });
-            services.AddDbContext<CookBookContext>(c => c.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-             .EnableSensitiveDataLogging());
-            services.AddAutoMapper(typeof(Startup));
-
-            services.AddScoped<ICategoryService, CategoryService>();
-
-             services.AddScoped<IIngredientService, IngredientService>();
-             services.AddScoped<IRecipeService, RecipeService>();
-              services.AddScoped<IUserService, UserService>();
-              services.AddScoped<IRecipeDetailService, RecipeDetailService>();
-
-
-
-
+            services.AddDbContext<CookBookContext>(c => c.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging());
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,19 +74,12 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
-
-
+            app.UseMiddleware<ExceptionMiddleweare>();
             app.UseHttpsRedirection();
-
             app.UseRouting();
-             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
-
-
-
-
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

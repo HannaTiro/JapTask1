@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/Ingredients")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class IngredientController : ControllerBase
+    public class IngredientsController : ControllerBase
     {
         private readonly IIngredientService _ingredientService;
 
-        public IngredientController(IIngredientService ingredientService)
+        public IngredientsController(IIngredientService ingredientService)
         {
             _ingredientService = ingredientService;
         }

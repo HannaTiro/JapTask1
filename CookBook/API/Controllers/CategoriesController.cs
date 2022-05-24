@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/Categories")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
@@ -25,7 +25,6 @@ namespace API.Controllers
             return Ok(await _categoryService.GetCategories());
         }
 
-
         [HttpGet("page")]
         public async Task<IActionResult> GetPage([FromQuery] PaginationParams paginationP)
         {
@@ -36,15 +35,7 @@ namespace API.Controllers
             return Ok(categories);
         }
 
-        //[HttpGet("{id}")]
-
-        //public async Task<Category> GetCategoryId(int id)
-        //{
-        //    return await _service.GetCategoryId(id);
-        //}
-
         [HttpGet("{categoryName}")]
-
         public async Task<IActionResult> GetCategoryByName(string categoryName)
         {
             return Ok(await _categoryService.GetCategoryByName(categoryName));

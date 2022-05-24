@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/RecipeDetails")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class RecipeDetailController:ControllerBase
+    public class RecipeDetailsController:ControllerBase
     {
         private readonly IRecipeDetailService _recipeDetailService;
 
-        public RecipeDetailController(IRecipeDetailService recipeDetailService)
+        public RecipeDetailsController(IRecipeDetailService recipeDetailService)
         {
             _recipeDetailService = recipeDetailService;
         }
@@ -27,6 +27,12 @@ namespace API.Controllers
         public async Task<IActionResult> InsertIngredient(int recipeId, [FromBody]InsertIngredientRequest request)
         {
             return Ok(await _recipeDetailService.InsertIngredient(recipeId, request));
+        }
+
+        [HttpGet("getIngredientsForRecipe/{recipeId}")]
+        public async Task<IActionResult> GetIngredientsForRecipe(int recipeId)
+        {
+            return Ok(await _recipeDetailService.GetIngredientsForRecipe(recipeId));
         }
 
 

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Ingredient } from 'src/app/_models/ingredient';
 import { ReciepeDetail } from 'src/app/_models/reciepeDetail';
 import { Recipe } from 'src/app/_models/recipe';
+import { RecipeDetailService } from 'src/app/_services/recipe-detail.service';
 import { RecipesService } from 'src/app/_services/recipes.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class RecipesDetailComponent implements OnInit {
   recipes: Recipe[];
   recipeId;
   ingredients:ReciepeDetail[];
-  constructor(private recipeService:RecipesService, private route: ActivatedRoute) {
+  constructor(private recipeService:RecipesService, private route: ActivatedRoute,private recipeDetailsService:RecipeDetailService) {
     this.recipeId = this.route.snapshot.paramMap.get('recipeId');
    }
 
@@ -30,8 +31,13 @@ export class RecipesDetailComponent implements OnInit {
   })
 }
 
+// getIngredients(){
+//   this.recipeService.getIngredients(this.recipeId).subscribe(ingred=>{
+//     this.ingredients=ingred;
+//   })
+// }
 getIngredients(){
-  this.recipeService.getIngredients(this.recipeId).subscribe(ingred=>{
+  this.recipeDetailsService.getIngredients(this.recipeId).subscribe(ingred=>{
     this.ingredients=ingred;
   })
 }

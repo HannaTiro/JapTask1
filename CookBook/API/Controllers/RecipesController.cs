@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/Recipes")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class RecipeController : ControllerBase
+    public class RecipesController : ControllerBase
     {
         private readonly IRecipeService _recipeService;
 
-        public RecipeController(IRecipeService recipeService)
+        public RecipesController(IRecipeService recipeService)
         {
             _recipeService = recipeService;
         }
@@ -24,12 +24,12 @@ namespace API.Controllers
             return Ok(await _recipeService.GetRecipes());
         }
 
-        //  [HttpGet("{recipeName}")]
-        [HttpGet("recipeName")]
-        public async Task<IActionResult>  GetCategoryByName(string recipeName)
-        {
-            return Ok(await _recipeService.GetRecipeByName(recipeName));
-        }
+        ////  [HttpGet("{recipeName}")]
+        //[HttpGet("recipeName")]
+        //public async Task<IActionResult>  GetCategoryByName(string recipeName)
+        //{
+        //    return Ok(await _recipeService.GetRecipeByName(recipeName));
+        //}
 
         [HttpGet("getByCategory/{categoryId}")]
         public async Task<IActionResult> GetByCategory(int categoryId)
@@ -37,16 +37,14 @@ namespace API.Controllers
             return Ok(await _recipeService.GetByCategory(categoryId));
         }
 
-        [HttpGet("{categoryName}")]
-
-        // [HttpGet("categoryName")]
-        public async Task<IActionResult>  GetRecipeByCategory(string categoryName)
-        {
-            return Ok(await _recipeService.GetRecipeByCategory(categoryName));
-        }
+        //[HttpGet("{categoryName}")]
+        //public async Task<IActionResult>GetRecipeByCategory(string categoryName)
+        //{
+        //    return Ok(await _recipeService.GetRecipeByCategory(categoryName));
+        //}
 
         [HttpGet("getById/{id}")]
-        public async Task<Models.Recipe> GetRecipeById(int id)
+        public async Task<Models.Recipe> GetRecipe(int id)
         {
             return await _recipeService.GetRecipeById(id);
         }
@@ -58,23 +56,12 @@ namespace API.Controllers
             return Ok(await _recipeService.InsertRecipe(request));
         }
 
-
-        [HttpGet("getIngredientsRecipe/{recipeId}")]
-        public async Task<IActionResult> GetIngredients(int recipeId)
-        {
-            return Ok(await _recipeService.GetIngredients(recipeId));
-        }
-
-        [HttpGet("getRecipesPage/{categoryId}")]
-
-       
-        public async Task<ActionResult<IEnumerable<Models.Recipe>>> GetRecipeByCategoryPaged(int categoryId, [FromQuery] PaginationParams paginationP)
-
+        [HttpGet("page/{categoryId}")]
+        public async Task<ActionResult<IEnumerable<Models.Recipe>>> GetPage(int categoryId, [FromQuery] PaginationParams paginationP)
         {
             var recipes = await _recipeService.GetRecipeByCategoryPaged(categoryId, paginationP);
             Response.AddPaginationHeader(recipes.CurrentPage, recipes.PageSize, recipes.TotalCount, recipes.TotalPages);
             return Ok(recipes);
-
         }
 
 

@@ -7,14 +7,11 @@ namespace API.Controllers
 {
 
     [ApiController]
-    [Route("api/Users")]
-
-    public class UserController : ControllerBase
+    [Route("api/[controller]")]
+    public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-       
-
-        public UserController(IUserService userService)
+        public UsersController(IUserService userService)
         {
             _userService = userService;
            
@@ -27,9 +24,6 @@ namespace API.Controllers
         {
             return _userService.Authenticiraj(username, password);
         }
-
-
-
 
         [HttpGet]
         [AllowAnonymous]

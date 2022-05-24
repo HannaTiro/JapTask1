@@ -9,8 +9,6 @@ namespace API.Interfaces
     {
         Task<List<Models.RecipeDetail>> GetIngredients(int recipeId);
         Task<ActionResult<Models.RecipeDetail>> InsertIngredient(int recipeId, InsertIngredientRequest request);
-
-
-
+        Task<List<Models.RecipeDetail>> GetIngredientsForRecipe(int recipeId);
     }
 }

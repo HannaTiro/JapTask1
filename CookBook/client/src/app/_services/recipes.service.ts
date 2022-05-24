@@ -37,7 +37,7 @@ paginatedResult:PaginatedResult<Recipe[]>=new PaginatedResult<Recipe[]>();
   
     }
     return this.http.get<Recipe[]>
-           (this.baseUrl+'recipes/getRecipesPage/'+categoryId+'/', {observe:'response',params}).pipe(
+           (this.baseUrl+'recipes/page/'+categoryId+'/', {observe:'response',params}).pipe(
              map(response=>{
                this.paginatedResult.result=response.body;
                if(response.headers.get('Pagination')!==null){
