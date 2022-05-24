@@ -26,18 +26,25 @@
                     </div>
                     <div>
                         <strong>Unit measure:</strong><br>
-                        <select
+                     <!--   <select
                         [class.is-invalid]='ingreientAddForm.get("measure").errors && ingreientAddForm.get("measure").touched'
                         name="Measure"
                         (change)="ChangeMeasure($event)"
                         formControlName="measure"
                         >
-                           <!--  <option *ngFor="let i of ingredients">
-                                {{i.ingredientName}}
-                            </option> -->
+                           
                             <option [value]="unit" *ngFor="let unit of units">  {{unit.toString()}}</option>
 
-                        </select>
+                        </select> 
+                    -->
+                    <select
+                    [class.is-invalid]='ingreientAddForm.get("measure").errors && ingreientAddForm.get("measure").touched'
+                    name="Measure"
+                    formControlName="measure"
+                    >
+                     <option [value]="unit.value" *ngFor="let unit of type | keyvalue">  {{unit.value}}</option>
+                       
+                    </select>
                         <br><br>
                     </div>
                     <br><br>

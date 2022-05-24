@@ -23,14 +23,12 @@ namespace API.Services
             _context = context;
             _mapper = mapper;
         }
-
         public async Task<List<Models.Recipe>> GetByCategory(int categoryId)
         {
             var recipe = await _context.Recipes.Where(j => j.CategoryId == categoryId).ToListAsync();
 
             return _mapper.Map<List<Models.Recipe>>(recipe);
         }
-
         public async Task<List<Models.Recipe>> GetRecipeByCategory(string categoryName)
         {
             var recipes = _context.Recipes.Include(x => x.Category).AsQueryable();
@@ -40,7 +38,6 @@ namespace API.Services
             return  _mapper.Map<List<Models.Recipe>>(recipes);
 
         }
-
         public async Task<PagedList<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId,PaginationParams paginationP)
         {
             var query = _context.Recipes.Include(x=>x.Category).Where(y=>y.CategoryId==categoryId).ProjectTo<Models.Recipe>(_mapper.ConfigurationProvider)
@@ -53,19 +50,16 @@ namespace API.Services
 
 
         }
-
         public async Task< Models.Recipe> GetRecipeById(int id)
         {
             var recipe = await _context.Recipes.Include(x=>x.Category).Where(x => x.Id == id).FirstOrDefaultAsync();
             return _mapper.Map<Models.Recipe>(recipe);
         }
-
         public async Task<Models.Recipe> GetRecipeByName(string recipeName)
         {
             var cat = await _context.Recipes.Where(j => j.Name == recipeName).FirstOrDefaultAsync();
             return _mapper.Map<Models.Recipe>(cat);
         }
-
         public async Task<List<Models.Recipe>> GetRecipes()
         {
             var query = _context.Recipes.Include(x=>x.Category).AsQueryable();
@@ -87,7 +81,5 @@ namespace API.Services
 
             return _mapper.Map<Entities.Recipe>(model);
         }
-
-       
     }
 }

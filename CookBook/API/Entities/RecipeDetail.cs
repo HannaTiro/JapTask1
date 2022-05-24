@@ -1,11 +1,13 @@
 ﻿#nullable disable
 
+using API.Helper;
+
 namespace API.Entities
 {
     public  class RecipeDetail: BaseEntity
     {
         public int Amount { get; set; }
-        public string Measure { get; set; }
+        public UnitsEnum Measure { get; set; }
         public decimal Price { get; set; }
 
         public virtual Ingredient Ingredient { get; set; }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ingredient } from 'src/app/_models/ingredient';
+import { unitsEnum } from 'src/app/_models/unitsEnum';
 import { IngredientService } from 'src/app/_services/ingredient.service';
 import { RecipeDetailService } from 'src/app/_services/recipe-detail.service';
 
@@ -18,6 +19,7 @@ ingreientAddForm:FormGroup;
 recipeId;
 changeIgredient:any;
 changeMeasure:any;
+type=unitsEnum;
 
   constructor(private ingredientService: IngredientService, 
               private route:ActivatedRoute,
@@ -31,7 +33,7 @@ changeMeasure:any;
 
   ngOnInit(): void {
     this.getIngredients();
-    this.getUnits();
+  //  this.getUnits();
     this.initializeForm();
   }
 
@@ -60,11 +62,11 @@ this.changeMeasure=e.target.value;
       this.ingredients=ingredient;
     })
   }
-  getUnits() {
+  /* getUnits() {
     this.ingredientService.loadUnits().subscribe(unit => {
       this.units=unit;
     })
-  }
+  } */
   addIngredient()
   {
     console.log(this.ingreientAddForm.value);

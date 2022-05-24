@@ -1,9 +1,12 @@
-﻿namespace API.Models
+﻿using API.Helper;
+
+namespace API.Models
 {
     public class RecipeDetail
     {
         public int Id { get; set; }
         public int Amount { get; set; }
+        // public UnitsEnum Measure { get; set; }
         public string Measure { get; set; }
         public decimal Price { get; set; }
 

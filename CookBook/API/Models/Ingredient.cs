@@ -1,4 +1,6 @@
-﻿namespace API.Models
+﻿using API.Helper;
+
+namespace API.Models
 {
     public class Ingredient
     {

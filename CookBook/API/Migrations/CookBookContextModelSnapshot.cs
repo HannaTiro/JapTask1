@@ -126,8 +126,8 @@ namespace API.Migrations
                     b.Property<int>("PurchaseAmount")
                         .HasColumnType("int");
 
-                    b.Property<string>("PurchaseMeasure")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PurchaseMeasure")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("PurchasePrice")
                         .HasColumnType("decimal(18,2)");
@@ -143,7 +143,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Eggs",
                             PurchaseAmount = 9,
-                            PurchaseMeasure = "kom",
+                            PurchaseMeasure = 4,
                             PurchasePrice = 5m
                         },
                         new
@@ -152,7 +152,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Milk",
                             PurchaseAmount = 170,
-                            PurchaseMeasure = "l",
+                            PurchaseMeasure = 2,
                             PurchasePrice = 200m
                         },
                         new
@@ -161,7 +161,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Flour",
                             PurchaseAmount = 50,
-                            PurchaseMeasure = "kg",
+                            PurchaseMeasure = 0,
                             PurchasePrice = 70m
                         },
                         new
@@ -170,7 +170,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Chicken",
                             PurchaseAmount = 2,
-                            PurchaseMeasure = "kg",
+                            PurchaseMeasure = 4,
                             PurchasePrice = 16m
                         },
                         new
@@ -179,7 +179,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Beef",
                             PurchaseAmount = 2,
-                            PurchaseMeasure = "kg",
+                            PurchaseMeasure = 0,
                             PurchasePrice = 20m
                         },
                         new
@@ -188,7 +188,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Cheese",
                             PurchaseAmount = 5,
-                            PurchaseMeasure = "kg",
+                            PurchaseMeasure = 0,
                             PurchasePrice = 20m
                         },
                         new
@@ -197,7 +197,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Yogurt",
                             PurchaseAmount = 3,
-                            PurchaseMeasure = "l",
+                            PurchaseMeasure = 2,
                             PurchasePrice = 7m
                         },
                         new
@@ -206,7 +206,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Patatoes",
                             PurchaseAmount = 10,
-                            PurchaseMeasure = "kg",
+                            PurchaseMeasure = 0,
                             PurchasePrice = 30m
                         },
                         new
@@ -215,7 +215,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Spinach",
                             PurchaseAmount = 10,
-                            PurchaseMeasure = "kg",
+                            PurchaseMeasure = 0,
                             PurchasePrice = 10m
                         },
                         new
@@ -224,7 +224,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Salt",
                             PurchaseAmount = 17,
-                            PurchaseMeasure = "kg",
+                            PurchaseMeasure = 0,
                             PurchasePrice = 10m
                         },
                         new
@@ -233,7 +233,7 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Peper",
                             PurchaseAmount = 20,
-                            PurchaseMeasure = "kg",
+                            PurchaseMeasure = 0,
                             PurchasePrice = 10m
                         });
                 });
@@ -316,10 +316,9 @@ namespace API.Migrations
                     b.Property<int>("IngredientId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Measure")
-                        .IsRequired()
+                    b.Property<int>("Measure")
                         .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -342,7 +341,7 @@ namespace API.Migrations
                             Amount = 3,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IngredientId = 1,
-                            Measure = "kom",
+                            Measure = 4,
                             Price = 1m,
                             RecipeId = 1
                         },
@@ -352,7 +351,7 @@ namespace API.Migrations
                             Amount = 3,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IngredientId = 2,
-                            Measure = "l",
+                            Measure = 2,
                             Price = 1m,
                             RecipeId = 1
                         },
@@ -362,7 +361,7 @@ namespace API.Migrations
                             Amount = 20,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IngredientId = 3,
-                            Measure = "g",
+                            Measure = 1,
                             Price = 1m,
                             RecipeId = 1
                         },
@@ -372,7 +371,7 @@ namespace API.Migrations
                             Amount = 3,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IngredientId = 1,
-                            Measure = "kom",
+                            Measure = 4,
                             Price = 1m,
                             RecipeId = 2
                         },
@@ -382,7 +381,7 @@ namespace API.Migrations
                             Amount = 3,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IngredientId = 2,
-                            Measure = "l",
+                            Measure = 2,
                             Price = 1m,
                             RecipeId = 2
                         },
@@ -392,7 +391,7 @@ namespace API.Migrations
                             Amount = 20,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IngredientId = 3,
-                            Measure = "g",
+                            Measure = 1,
                             Price = 1m,
                             RecipeId = 2
                         });
@@ -439,8 +438,8 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Hanna",
                             LastName = "Tiro",
-                            PasswordHash = "FA/w9qWMGp4L5bw7VTGYlvE86JM=",
-                            PasswordSalt = "4scOK26KXZ5UCwIvCZN+0Q==",
+                            PasswordHash = "z01QT6U6fBJ7V4CFH1OGxYeI590=",
+                            PasswordSalt = "2FXZAkMyYbukVb4Dx6KmeA==",
                             UserName = "hanna"
                         },
                         new
@@ -449,8 +448,8 @@ namespace API.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Belma",
                             LastName = "Nukic",
-                            PasswordHash = "/eewK6HgqGm5pfzkhMFwp5zZdUw=",
-                            PasswordSalt = "0kYf5xb02672yrr9+z4w2Q==",
+                            PasswordHash = "SFYgaifGcgohxB2/WF4h1+K2sWw=",
+                            PasswordSalt = "1hcigBgsoVW6sPlMS5QSIg==",
                             UserName = "belma"
                         });
                 });

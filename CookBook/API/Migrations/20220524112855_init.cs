@@ -48,7 +48,7 @@ namespace API.Migrations
                     Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     PurchasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PurchaseAmount = table.Column<int>(type: "int", nullable: false),
-                    PurchaseMeasure = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PurchaseMeasure = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -86,7 +86,7 @@ namespace API.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    Measure = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
+                    Measure = table.Column<int>(type: "int", maxLength: 3, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IngredientId = table.Column<int>(type: "int", nullable: false),
                     RecipeId = table.Column<int>(type: "int", nullable: false),
@@ -114,8 +114,8 @@ namespace API.Migrations
                 columns: new[] { "Id", "CreatedAt", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "UserName" },
                 values: new object[,]
                 {
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Belma", "Nukic", "/eewK6HgqGm5pfzkhMFwp5zZdUw=", "0kYf5xb02672yrr9+z4w2Q==", "belma" },
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hanna", "Tiro", "FA/w9qWMGp4L5bw7VTGYlvE86JM=", "4scOK26KXZ5UCwIvCZN+0Q==", "hanna" }
+                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Belma", "Nukic", "SFYgaifGcgohxB2/WF4h1+K2sWw=", "1hcigBgsoVW6sPlMS5QSIg==", "belma" },
+                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hanna", "Tiro", "z01QT6U6fBJ7V4CFH1OGxYeI590=", "2FXZAkMyYbukVb4Dx6KmeA==", "hanna" }
                 });
 
             migrationBuilder.InsertData(
@@ -141,17 +141,17 @@ namespace API.Migrations
                 columns: new[] { "Id", "CreatedAt", "Name", "PurchaseAmount", "PurchaseMeasure", "PurchasePrice" },
                 values: new object[,]
                 {
-                    { 11, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Peper", 20, "kg", 10m },
-                    { 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Salt", 17, "kg", 10m },
-                    { 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Spinach", 10, "kg", 10m },
-                    { 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Patatoes", 10, "kg", 30m },
-                    { 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Beef", 2, "kg", 20m },
-                    { 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cheese", 5, "kg", 20m },
-                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Chicken", 2, "kg", 16m },
-                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Flour", 50, "kg", 70m },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Milk", 170, "l", 200m },
-                    { 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Yogurt", 3, "l", 7m },
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Eggs", 9, "kom", 5m }
+                    { 11, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Peper", 20, 0, 10m },
+                    { 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Salt", 17, 0, 10m },
+                    { 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Spinach", 10, 0, 10m },
+                    { 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Patatoes", 10, 0, 30m },
+                    { 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Beef", 2, 0, 20m },
+                    { 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cheese", 5, 0, 20m },
+                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Chicken", 2, 4, 16m },
+                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Flour", 50, 0, 70m },
+                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Milk", 170, 2, 200m },
+                    { 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Yogurt", 3, 2, 7m },
+                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Eggs", 9, 4, 5m }
                 });
 
             migrationBuilder.InsertData(
@@ -174,12 +174,12 @@ namespace API.Migrations
                 columns: new[] { "Id", "Amount", "CreatedAt", "IngredientId", "Measure", "Price", "RecipeId" },
                 values: new object[,]
                 {
-                    { 1, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "kom", 1m, 1 },
-                    { 2, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "l", 1m, 1 },
-                    { 3, 20, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "g", 1m, 1 },
-                    { 4, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "kom", 1m, 2 },
-                    { 5, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "l", 1m, 2 },
-                    { 6, 20, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "g", 1m, 2 }
+                    { 1, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 4, 1m, 1 },
+                    { 2, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 1m, 1 },
+                    { 3, 20, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 1, 1m, 1 },
+                    { 4, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 4, 1m, 2 },
+                    { 5, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 1m, 2 },
+                    { 6, 20, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 1, 1m, 2 }
                 });
 
             migrationBuilder.CreateIndex(

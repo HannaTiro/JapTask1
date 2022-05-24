@@ -1,4 +1,5 @@
 ﻿using API.Entities;
+using API.Helper;
 using API.Interfaces;
 using AutoMapper;
 using System.Collections.Generic;
@@ -16,15 +17,12 @@ namespace API.Services
             _context = context;
             _mapper = mapper;
         }
-
         public async Task<List<Models.Ingredient>> GetAll()
         {
             var ingredients = _context.Ingredients.AsQueryable();
             var i = ingredients.ToList();
             return  _mapper.Map<List<Models.Ingredient>>(i);
-
         }
-
         public List<string> GetUnits()
         {
             var list = new List<string> { "kg", "g", "l", "ml", "kom" };

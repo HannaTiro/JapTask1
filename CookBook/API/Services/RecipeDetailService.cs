@@ -1,4 +1,5 @@
 ﻿using API.Entities;
+using API.Helper;
 using API.Interfaces;
 using API.Requests.RecipeDetail;
 using AutoMapper;
@@ -31,7 +32,6 @@ namespace API.Services
         public  async Task<ActionResult<Models.RecipeDetail>> InsertIngredient(int recipeId, InsertIngredientRequest request)
         {
                 var recipe = _context.Recipes.Find(recipeId);
-            
                 var entity = new RecipeDetail
                 {
                     RecipeId = recipeId,
@@ -39,14 +39,12 @@ namespace API.Services
                     IngredientId = request.Id,
                     Measure = request.Measure
                 };
-            // entity.Price = GetPrice(entity.RecipeDetai entity.IngredientId);
+              // entity.Price = GetPrice(entity.RecipeDetai entity.IngredientId);
                entity.Price = GetPrice(request.Measure, request.Amount, request.Id);
                
             _context.RecipeDetails.Add(entity);
             await  _context.SaveChangesAsync();
-
             var recipef = _context.Recipes.Find(recipeId);
-
             recipef.TotalPrice = GetTotalPrice(recipeId);
             await _context.SaveChangesAsync();
 
@@ -64,7 +62,7 @@ namespace API.Services
             }
             return price;
         }
-        public  decimal GetPrice(string measure, int amount,int ingredientId)
+        public  decimal GetPrice(UnitsEnum measure, int amount,int ingredientId)
         {
          //   var recipeDetail = _context.RecipeDetails.Find(recipeDetailId);
             var ingredient = _context.Ingredients.Find(ingredientId);
@@ -77,29 +75,27 @@ namespace API.Services
             var ingredientUnit = ingredient.PurchaseMeasure;
             if(ingredientAmount!=0 && recipeDetailAmount!=0)
             { 
-            if(recipeDetailUnit== ingredientUnit)
-            {
+             if(recipeDetailUnit== ingredientUnit)
+             {
                   return  ingredient.PurchasePrice/(ingredientAmount / recipeDetailAmount);
-                
-            }
-            else
-            { 
-                if((recipeDetailUnit=="kg" && ingredientUnit == "g") || (recipeDetailUnit == "l" && ingredientUnit == "ml"))
+             }
+             else
+             { 
+                if((measure.ToString()=="kg" && ingredientUnit.ToString()=="g" ) || (recipeDetailUnit.ToString()=="l" && ingredientUnit.ToString() == "ml"))
                 {
                     var convert = recipeDetailAmount * 1000;
                     return ingredient.PurchasePrice / (ingredientAmount / convert);
                 }
-                else if((recipeDetailUnit == "g" && ingredientUnit == "kg" ) || (recipeDetailUnit == "ml" && ingredientUnit == "l"))
+                else if((recipeDetailUnit.ToString() == "g" && ingredientUnit.ToString() == "kg" ) || (recipeDetailUnit.ToString() == "ml" && ingredientUnit.ToString() == "l"))
                 {
                     var convert = ingredientAmount * 1000;
                         var convert2 = convert / recipeDetailAmount;
                         return ingredient.PurchasePrice / convert2;
-
                 }
               
+             }
             }
-            }
-            return 0;
+               return 0;
         }
         public async Task<List<Models.RecipeDetail>> GetIngredientsForRecipe(int recipeId)
         {

@@ -157,7 +157,7 @@ namespace API.Seeder
                     Name = "Eggs",
                     PurchasePrice = 5,
                     PurchaseAmount = 9,
-                    PurchaseMeasure = "kom"
+                    PurchaseMeasure = UnitsEnum.kom
                 },
                 new Ingredient()
                 {
@@ -165,7 +165,7 @@ namespace API.Seeder
                     Name = "Milk",
                     PurchasePrice = 200,
                     PurchaseAmount = 170,
-                    PurchaseMeasure = "l"
+                    PurchaseMeasure = UnitsEnum.l
                 },
                 new Ingredient()
                   {
@@ -173,72 +173,72 @@ namespace API.Seeder
                       Name = "Flour",
                       PurchasePrice = 70,
                       PurchaseAmount = 50,
-                      PurchaseMeasure = "kg"
-                  },
+                      PurchaseMeasure = UnitsEnum.kg
+                },
                 new Ingredient()
                     {
                         Id = 4,
                         Name = "Chicken",
                         PurchasePrice = 16,
                         PurchaseAmount = 2,
-                        PurchaseMeasure = "kg"
-                    },
+                        PurchaseMeasure = UnitsEnum.kom
+                },
                 new Ingredient()
                       {
                           Id = 5,
                           Name = "Beef",
                           PurchasePrice = 20,
                           PurchaseAmount = 2,
-                          PurchaseMeasure = "kg"
-                      },
+                          PurchaseMeasure = UnitsEnum.kg
+                },
                 new Ingredient()
-                        {
-                            Id = 6,
-                            Name = "Cheese",
-                            PurchasePrice = 20,
-                            PurchaseAmount = 5,
-                            PurchaseMeasure = "kg"
-                        },
+                {
+                  Id = 6,
+                  Name = "Cheese",
+                  PurchasePrice = 20,
+                  PurchaseAmount = 5,
+                  PurchaseMeasure = UnitsEnum.kg
+                },
                 new Ingredient()
-                          {
-                              Id = 7,
-                              Name = "Yogurt",
-                              PurchasePrice = 7,
-                              PurchaseAmount = 3,
-                              PurchaseMeasure = "l"
-                          },
+                {
+                  Id = 7,
+                  Name = "Yogurt",
+                  PurchasePrice = 7,
+                  PurchaseAmount = 3,
+                  PurchaseMeasure = UnitsEnum.l
+                },
                 new Ingredient()
-                            {
-                                Id = 8,
-                                Name = "Patatoes",
-                                PurchasePrice = 30,
-                                PurchaseAmount = 10,
-                                PurchaseMeasure = "kg"
-                            },
+                {
+                  Id = 8,
+                  Name = "Patatoes",
+                  PurchasePrice = 30,
+                  PurchaseAmount = 10,
+                  PurchaseMeasure = UnitsEnum.kg
+                },
                 new Ingredient()
-                              {
-                                  Id = 9,
-                                  Name = "Spinach",
-                                  PurchasePrice = 10,
-                                  PurchaseAmount = 10,
-                                  PurchaseMeasure = "kg"
-                              },
+                {
+                   Id = 9,
+                   Name = "Spinach",
+                   PurchasePrice = 10,
+                   PurchaseAmount = 10,
+                   PurchaseMeasure = UnitsEnum.kg
+                },
                 new Ingredient()
-                                {
-                                    Id = 10,
-                                    Name = "Salt",
-                                    PurchasePrice = 10,
-                                    PurchaseAmount = 17,
-                                    PurchaseMeasure = "kg"
-                                },
+                {
+                  Id = 10,
+                  Name = "Salt",
+                  PurchasePrice = 10,
+                  PurchaseAmount = 17,
+                  PurchaseMeasure = UnitsEnum.kg
+                },
                 new Ingredient()
-                                  {
-                                      Id = 11,
-                                      Name = "Peper",
-                                      PurchasePrice = 10,
-                                      PurchaseAmount = 20,
-                                      PurchaseMeasure = "kg"
-                                  }
+                {
+                  Id = 11,
+                  Name = "Peper",
+                  PurchasePrice = 10,
+                  PurchaseAmount = 20,
+                  PurchaseMeasure = UnitsEnum.kg
+                }
   );
 
             //Recipes
@@ -267,9 +267,7 @@ namespace API.Seeder
                      TotalPrice = 7,
                      CategoryId = 1
                  }
-
-
-               );
+            );
 
 
             //recipeDetail
@@ -280,7 +278,7 @@ namespace API.Seeder
                     RecipeId = 1,
                     IngredientId = 1,
                     Amount = 3,
-                    Measure = "kom",
+                    Measure = UnitsEnum.kom,
                     Price = 1
                 },
                   new RecipeDetail()
@@ -289,7 +287,7 @@ namespace API.Seeder
                       RecipeId = 1,
                       IngredientId = 2,
                       Amount = 3,
-                      Measure = "l",
+                      Measure = UnitsEnum.l,
                       Price = 1
                   },
                   new RecipeDetail()
@@ -298,7 +296,7 @@ namespace API.Seeder
                       RecipeId = 1,
                       IngredientId = 3,
                       Amount = 20,
-                      Measure = "g",
+                      Measure = UnitsEnum.g,
                       Price = 1
                   },
 
@@ -309,7 +307,7 @@ namespace API.Seeder
                       RecipeId = 2,
                       IngredientId = 1,
                       Amount = 3,
-                      Measure = "kom",
+                      Measure = UnitsEnum.kom,
                       Price = 1
                   },
                   new RecipeDetail()
@@ -318,7 +316,7 @@ namespace API.Seeder
                       RecipeId = 2,
                       IngredientId = 2,
                       Amount = 3,
-                      Measure = "l",
+                      Measure = UnitsEnum.l,
                       Price = 1
                   },
                   new RecipeDetail()
@@ -327,7 +325,7 @@ namespace API.Seeder
                       RecipeId = 2,
                       IngredientId = 3,
                       Amount = 20,
-                      Measure = "g",
+                      Measure = UnitsEnum.g,
                       Price = 1
                   }
 
