@@ -1,9 +1,12 @@
 ﻿using API.Entities;
 using API.Helper;
 using API.Interfaces;
+using API.Requests;
+using API.Requests.Recipe;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,16 +38,40 @@ namespace API.Services
             return  _mapper.Map<List<Models.Recipe>>(recipes);
 
         }
-        public async Task<PagedList<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId,PaginationParams paginationP)
-        {
-            var query = _context.Recipes.Include(x=>x.Category).Where(y=>y.CategoryId==categoryId).ProjectTo<Models.Recipe>(_mapper.ConfigurationProvider)
-             .AsQueryable().AsNoTracking();
-            query = paginationP.OrderBy switch
-            {
-               _ => query.OrderBy(u => u.TotalPrice)
-            };
-            return await PagedList<Models.Recipe>.CreateAsync(query, paginationP.PageNumber, paginationP.PageSize);
+        //public async Task<PagedList<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId,PaginationParams paginationP)
+        //{
+        //    var query = _context.Recipes.Include(x=>x.Category).Where(y=>y.CategoryId==categoryId).ProjectTo<Models.Recipe>(_mapper.ConfigurationProvider)
+        //     .AsQueryable().AsNoTracking();
+        //    query = paginationP.OrderBy switch
+        //    {
+        //       _ => query.OrderBy(u => u.TotalPrice)
+        //    };
+        //    return await PagedList<Models.Recipe>.CreateAsync(query, paginationP.PageNumber, paginationP.PageSize);
 
+
+        //}
+        public async Task<PagedResult<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId,BaseSearch search)
+        {
+            var res = new PagedResult<Models.Recipe>();
+            var query = _context.Recipes.Include(x => x.Category).Where(y => y.CategoryId == categoryId).AsQueryable();
+            query = query.OrderBy(x => x.TotalPrice);
+            //include counter
+            if (search.IncludeCount == true)
+            {
+                res.Count = query.Count();
+            }
+
+            //paging
+            if (search.RetriveAll.GetValueOrDefault(false) == true)
+            {
+                if (search.Page < 0)
+                    search.Page = 0;
+                query = query.Skip((int)((search.Page - 1) * search.PageSize)).Take((int)(search.PageSize));
+
+            }
+            var result = await query.ToListAsync();
+            res.Results = _mapper.Map<IReadOnlyList<Models.Recipe>>(result);
+            return res;
 
         }
         public async Task< Models.Recipe> GetRecipeById(int id)
@@ -77,6 +104,65 @@ namespace API.Services
            await _context.SaveChangesAsync();
 
             return _mapper.Map<Entities.Recipe>(model);
+        }
+
+        public async Task<PagedResult<Models.RecipeDetail>> GetPage(RecipeSearchRequest search)
+        {
+            var res = new PagedResult<Models.RecipeDetail>();
+            var query = _context.RecipeDetails.Include(x => x.Recipe).Include(x => x.Ingredient).AsQueryable();
+            var listIngredients = query.ToList();
+
+            //filtering
+            if (!string.IsNullOrEmpty(search.RecipeName))
+            {
+                query = query.Where(x => x.Recipe.Name.Contains(search.RecipeName));
+            }
+
+            if (!string.IsNullOrEmpty(search.Description))
+            {
+                query = query.Where(x => x.Recipe.Description.ToUpper().Contains(search.Description.Trim().ToUpper()));
+            }
+
+            if (!string.IsNullOrEmpty(search.IngredientName))
+            {
+              query = query.Where(x => x.Ingredient.Name.ToUpper().StartsWith(search.IngredientName.Trim().ToUpper()));
+            }
+
+            // var list = query.ToList();
+            //  return _mapper.Map<List<Models.RecipeDetail>>(lista);
+
+            //ordering
+            //if (!string.IsNullOrWhiteSpace(search.SortBy))
+            //{
+                if (search.SortOrder == SortOrder.Ascending)
+                {
+                    query = query.OrderBy(x=>x.Price);
+                }
+                else
+                {
+                    query = query.OrderByDescending(x=>x.Price);
+                }
+           // }
+
+            //include counter
+            if (search.IncludeCount==true)
+            {
+                res.Count = query.Count();
+            }
+
+            //paging
+            if (search.RetriveAll.GetValueOrDefault(false)==true)
+            {
+                if (search.Page < 0)
+                    search.Page = 0;
+                query = query.Skip((int)((search.Page - 1) * search.PageSize)).Take((int)(search.PageSize));
+
+            }
+          
+
+           var result =await  query.ToListAsync();
+            res.Results = _mapper.Map<IReadOnlyList<Models.RecipeDetail>>(result);
+            return res;
         }
     }
 }

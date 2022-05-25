@@ -1,6 +1,7 @@
 ﻿using API.Extentions;
 using API.Helper;
 using API.Interfaces;
+using API.Requests;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -26,13 +27,9 @@ namespace API.Controllers
         }
 
         [HttpGet("page")]
-        public async Task<IActionResult> GetPage([FromQuery] PaginationParams paginationP)
+        public async Task<PagedResult<Models.Category>> GetPage([FromQuery] BaseSearch search)
         {
-            var categories = await _categoryService.GetCategoriesPag(paginationP);
-            
-            Response.AddPaginationHeader(categories.CurrentPage, categories.PageSize, categories.TotalCount, categories.TotalPages);
-
-            return Ok(categories);
+            return await _categoryService.GetCategoriesPag(search);
         }
 
         [HttpGet("{categoryName}")]

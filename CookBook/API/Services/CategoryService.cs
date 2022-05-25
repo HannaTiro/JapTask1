@@ -1,6 +1,7 @@
 ﻿using API.Entities;
 using API.Helper;
 using API.Interfaces;
+using API.Requests;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
@@ -19,17 +20,25 @@ namespace API.Services
             _context = context;
             _mapper = mapper;
         }
-        public async Task< PagedList<Models.Category>> GetCategoriesPag(PaginationParams paginationP )
+        public async Task<PagedResult<Models.Category>> GetCategoriesPag(BaseSearch search)
         {
-            //var query = _context.Categories
-            //  .AsQueryable();
-            //var list = query.ToList();
-            //return _mapper.Map<List<Models.Category>>(list);
+            var res = new PagedResult<Models.Category>();
+            var query = _context.Categories.AsQueryable();
+           // query = query.OrderBy(x => x.Name);
+            if (search.IncludeCount == true)
+            {
+                res.Count = query.Count();
+            }
+            if (search.RetriveAll.GetValueOrDefault(false) == true)
+            {
+                if (search.Page < 0)
+                    search.Page = 0;
+                query = query.Skip((int)((search.Page - 1) * search.PageSize)).Take((int)(search.PageSize));
 
-            var query = _context.Categories.ProjectTo<Models.Category>(_mapper.ConfigurationProvider)
-                .AsQueryable().AsNoTracking();
-            return await PagedList<Models.Category>.CreateAsync(query, paginationP.PageNumber, paginationP.PageSize);
-
+            }
+            var result = await query.ToListAsync();
+            res.Results = _mapper.Map<IReadOnlyList<Models.Category>>(result);
+            return res;
         }
         public async  Task<List<Models.Category>> GetCategories()
         {
@@ -37,10 +46,7 @@ namespace API.Services
               .AsQueryable();
             var list = query.ToList();
             return  _mapper.Map<List<Models.Category>>(list);
-
-
         }
-
         public async Task<Models.Category> GetCategoryId(int id)
         {
             var cat= await _context.Categories.FindAsync(id);

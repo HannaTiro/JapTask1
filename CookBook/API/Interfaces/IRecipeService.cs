@@ -1,5 +1,7 @@
 ﻿using API.Helper;
 using API.Models;
+using API.Requests;
+using API.Requests.Recipe;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,8 +16,13 @@ namespace API.Interfaces
        Task<List< Models.Recipe>> GetRecipeByCategory(string categoryName);
        Task<List<Recipe>> GetByCategory(int id);
        Task<ActionResult<Entities.Recipe>> InsertRecipe(Models.Recipe request);
-       Task<PagedList<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId, PaginationParams paginationP);
-       // List<Models.Recipe> GetRecipesSearch(RecipeSearchRequest request);
+        // Task<PagedList<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId, PaginationParams paginationP);
+        Task<PagedResult<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId, BaseSearch search);
+
+        Task<PagedResult<Models.RecipeDetail>> GetPage(RecipeSearchRequest search);
+
+
+
 
     }
 }

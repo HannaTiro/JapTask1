@@ -1,6 +1,6 @@
 ﻿namespace API.Requests.Recipe
 {
-    public class RecipeSearchRequest
+    public class RecipeSearchRequest: BaseSearch
     {
    
         public string RecipeName { get; set; }

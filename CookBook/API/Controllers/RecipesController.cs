@@ -1,6 +1,8 @@
 ﻿using API.Extentions;
 using API.Helper;
 using API.Interfaces;
+using API.Requests;
+using API.Requests.Recipe;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -57,11 +59,20 @@ namespace API.Controllers
         }
 
         [HttpGet("page/{categoryId}")]
-        public async Task<ActionResult<IEnumerable<Models.Recipe>>> GetPage(int categoryId, [FromQuery] PaginationParams paginationP)
+        //public async Task<ActionResult<IEnumerable<Models.Recipe>>> GetPage(int categoryId, [FromQuery] PaginationParams paginationP)
+        //{
+        //    var recipes = await _recipeService.GetRecipeByCategoryPaged(categoryId, paginationP);
+        //    Response.AddPaginationHeader(recipes.CurrentPage, recipes.PageSize, recipes.TotalCount, recipes.TotalPages);
+        //    return Ok(recipes);
+        //}
+        public async Task<PagedResult<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId,[FromQuery] BaseSearch search)
         {
-            var recipes = await _recipeService.GetRecipeByCategoryPaged(categoryId, paginationP);
-            Response.AddPaginationHeader(recipes.CurrentPage, recipes.PageSize, recipes.TotalCount, recipes.TotalPages);
-            return Ok(recipes);
+            return await _recipeService.GetRecipeByCategoryPaged(categoryId, search);
+        }
+        [HttpGet("page")]
+        public async Task<PagedResult<Models.RecipeDetail>> GetPage([FromQuery]RecipeSearchRequest search)
+        {
+            return await _recipeService.GetPage(search);
         }
 
 
