@@ -44,16 +44,13 @@ namespace CookBook.Services
         }
         public async  Task<List<Core.Models.Category>> GetCategories()
         {
-            var query =  _context.Categories
-              .AsQueryable();
-            var list = query.ToList();
+            var list = await  _context.Categories.ToListAsync();
             return  _mapper.Map<List<Core.Models.Category>>(list);
         }
         public async Task<Core.Models.Category> GetCategoryById(int id)
         {
             var cat= await _context.Categories.FindAsync(id);
             return _mapper.Map<Core.Models.Category>(cat);
-
         }
 
         //public async Task<Core.Models.Category> GetCategoryByName(string categoryName)
