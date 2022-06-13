@@ -1,4 +1,4 @@
-﻿using API.Entities;
+﻿using CookBook.Database.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace API

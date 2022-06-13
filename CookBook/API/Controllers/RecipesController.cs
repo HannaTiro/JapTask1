@@ -1,10 +1,8 @@
-﻿using API.Extentions;
-using API.Helper;
-using API.Interfaces;
-using API.Requests;
-using API.Requests.Recipe;
+﻿using CookBook.Common.Helper;
+using CookBook.Core.Interfaces;
+using CookBook.Core.Models.Requests.Recipe;
+using CookBook.Core.Models.Requests.SearchObjects;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -36,7 +34,7 @@ namespace API.Controllers
         [HttpGet("getByCategory/{categoryId}")]
         public async Task<IActionResult> GetByCategory(int categoryId)
         {
-            return Ok(await _recipeService.GetByCategory(categoryId));
+            return Ok(await _recipeService.GetByCategoryId(categoryId));
         }
 
         //[HttpGet("{categoryName}")]
@@ -46,13 +44,13 @@ namespace API.Controllers
         //}
 
         [HttpGet("getById/{id}")]
-        public async Task<Models.Recipe> GetRecipe(int id)
+        public async Task<CookBook.Core.Models.Recipe> GetRecipe(int id)
         {
             return await _recipeService.GetRecipeById(id);
         }
 
         [HttpPost("addRecipe")]
-        public async Task<IActionResult> InsertRecipe([FromBody]Models.Recipe request)
+        public async Task<IActionResult> InsertRecipe([FromBody] CookBook.Core.Models.Recipe request)
         {
 
             return Ok(await _recipeService.InsertRecipe(request));
@@ -65,12 +63,12 @@ namespace API.Controllers
         //    Response.AddPaginationHeader(recipes.CurrentPage, recipes.PageSize, recipes.TotalCount, recipes.TotalPages);
         //    return Ok(recipes);
         //}
-        public async Task<PagedResult<Models.Recipe>> GetRecipeByCategoryPaged(int categoryId,[FromQuery] BaseSearch search)
+        public async Task<PagedResult<CookBook.Core.Models.Recipe>> GetRecipeByCategoryPaged([FromQuery] RecipeSearch search)
         {
-            return await _recipeService.GetRecipeByCategoryPaged(categoryId, search);
+            return await _recipeService.GetRecipeByCategoryPaged(search);
         }
         [HttpGet("page")]
-        public async Task<PagedResult<Models.RecipeDetail>> GetPage([FromQuery]RecipeSearchRequest search)
+        public async Task<PagedResult<CookBook.Core.Models.RecipeDetail>> GetPage([FromQuery]RecipeSearchRequest search)
         {
             return await _recipeService.GetPage(search);
         }

@@ -1,4 +1,4 @@
-﻿using API.Interfaces;
+﻿using CookBook.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace API.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("Authenticiraj/{username},{password}")]
-        public Models.User Authenticiraj(string username, string password)
+        public CookBook.Core.Models.User Authenticiraj(string username, string password)
         {
             return _userService.Authenticiraj(username, password);
         }
@@ -28,7 +28,7 @@ namespace API.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("api/users")]
-        public List<Models.User> GetUsers()
+        public List<CookBook.Core.Models.User> GetUsers()
         {
             return _userService.GetUsers();
         }

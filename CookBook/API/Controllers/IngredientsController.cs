@@ -1,6 +1,5 @@
-﻿using API.Interfaces;
+﻿using CookBook.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -21,11 +20,11 @@ namespace API.Controllers
         {
             return Ok( await _ingredientService.GetAll());
         }
-        [HttpGet("getUnits")]
-        public List<string> GetUnits()
-        {
-            return _ingredientService.GetUnits();
-        }
+        //[HttpGet("getUnits")]
+        //public List<string> GetUnits()
+        //{
+        //    return _ingredientService.GetUnits();
+        //}
 
 
     }

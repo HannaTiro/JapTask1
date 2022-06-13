@@ -1,6 +1,7 @@
 
 export interface insertIngredientRequest {
-    id: number;
+    recipeId:number
+    ingredientId: number;
     amount: number;
     measure:string;
   

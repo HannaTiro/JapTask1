@@ -1,5 +1,5 @@
-﻿using API.Interfaces;
-using API.Requests.RecipeDetail;
+﻿using CookBook.Core.Interfaces;
+using CookBook.Core.Models.Requests.RecipeDetail;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -22,10 +22,10 @@ namespace API.Controllers
             return Ok(await _recipeDetailService.GetIngredients(recipeId));
         }
 
-        [HttpPost("addIngredient/{recipeId}")]
-        public async Task<IActionResult> InsertIngredient(int recipeId, [FromBody]InsertIngredientRequest request)
+        [HttpPost("addIngredient")]
+        public async Task<IActionResult> InsertIngredient([FromBody]InsertIngredientRequest request)
         {
-            return Ok(await _recipeDetailService.InsertIngredient(recipeId, request));
+            return Ok(await _recipeDetailService.InsertIngredient (request));
         }
 
         [HttpGet("getIngredientsForRecipe/{recipeId}")]

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CookBook.Core\CookBook.Core.csproj" />
+    <ProjectReference Include="..\CookBook.Database\CookBook.Database.csproj" />
+    <ProjectReference Include="..\CookBook.Mapper\CookBook.Mapper.csproj" />
+  </ItemGroup>
+
+</Project>

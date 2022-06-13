@@ -1,12 +1,8 @@
-﻿using API.Interfaces;
-using API.Mapping;
-using API.Services;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CookBook.Mapper;
+using CookBook.Core.Interfaces;
+using CookBook.Services;
 
 namespace API.Extentions
 {

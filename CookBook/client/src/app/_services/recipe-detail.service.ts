@@ -14,10 +14,10 @@ export class RecipeDetailService {
 
   constructor(private http:HttpClient) { }
 
-  addIngredient(recipeId:number,request:insertIngredientRequest)
+  addIngredient(request:insertIngredientRequest)
   {
     //return this.http.post(this.baseUrl+'addRecipe?'+ recipe,{});
-    return this.http.post(this.baseUrl+'RecipeDetails/addIngredient/'+recipeId+'/', request);
+    return this.http.post(this.baseUrl+'RecipeDetails/addIngredient/', request);
 
   }
   getIngredients(recipeId)

@@ -17,4 +17,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CookBook.Common\CookBook.Common.csproj" />
+    <ProjectReference Include="..\CookBook.Core\CookBook.Core.csproj" />
+    <ProjectReference Include="..\CookBook.Database\CookBook.Database.csproj" />
+    <ProjectReference Include="..\CookBook.Mapper\CookBook.Mapper.csproj" />
+    <ProjectReference Include="..\CookBook.Services\CookBook.Services.csproj" />
+  </ItemGroup>
+
 </Project>

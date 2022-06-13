@@ -1,9 +1,8 @@
-﻿using API.Extentions;
-using API.Helper;
-using API.Interfaces;
-using API.Requests;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CookBook.Core.Models.Requests.SearchObjects;
+using CookBook.Core.Interfaces;
+using CookBook.Common.Helper;
 
 namespace API.Controllers
 {
@@ -27,16 +26,16 @@ namespace API.Controllers
         }
 
         [HttpGet("page")]
-        public async Task<PagedResult<Models.Category>> GetPage([FromQuery] BaseSearch search)
+        public async Task<PagedResult<CookBook.Core.Models.Category>> GetPage([FromQuery] CategorySearch search)
         {
-            return await _categoryService.GetCategoriesPag(search);
+            return await _categoryService.GetCategoriesPage(search);
         }
 
-        [HttpGet("{categoryName}")]
-        public async Task<IActionResult> GetCategoryByName(string categoryName)
-        {
-            return Ok(await _categoryService.GetCategoryByName(categoryName));
-        }
+        //[HttpGet("{categoryName}")]
+        //public async Task<IActionResult> GetCategoryByName(string categoryName)
+        //{
+        //    return Ok(await _categoryService.GetCategoryByName(categoryName));
+        //}
 
     }
 }

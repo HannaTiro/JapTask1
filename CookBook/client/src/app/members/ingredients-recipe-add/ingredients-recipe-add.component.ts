@@ -70,7 +70,7 @@ this.changeMeasure=e.target.value;
   addIngredient()
   {
     console.log(this.ingreientAddForm.value);
-    this.recipeDetailService.addIngredient(this.recipeId,this.ingreientAddForm.value).subscribe(()=>{
+    this.recipeDetailService.addIngredient(this.ingreientAddForm.value).subscribe(()=>{
       this.router.navigateByUrl('/recipe/'+this.recipeId);
     })
   
